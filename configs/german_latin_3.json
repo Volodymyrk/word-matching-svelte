@@ -1,0 +1,9 @@
+{
+  "file": "german_latin_3.json",
+  "name": "German – Latin 3",
+  "vocab_file": "latin_3.json",
+  "base_language": "latin",
+  "target_language": "german",
+  "round_seconds": 60,
+  "combo_seconds": 2.0
+}
