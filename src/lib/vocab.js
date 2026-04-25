@@ -1,17 +1,19 @@
 /** Load game configs and vocab, create rounds. Port of vocab.py. */
 
+const base = import.meta.env.BASE_URL;
+
 export async function fetchConfigs() {
-  const res = await fetch('/configs/index.json');
+  const res = await fetch(`${base}configs/index.json`);
   return res.json();
 }
 
 export async function fetchConfig(filename) {
-  const res = await fetch(`/configs/${filename}`);
+  const res = await fetch(`${base}configs/${filename}`);
   return res.json();
 }
 
 async function loadAllPairs(config) {
-  const res = await fetch(`/configs/${config.vocab_file}`);
+  const res = await fetch(`${base}configs/${config.vocab_file}`);
   const data = await res.json();
   const baseKey = config.base_language;
   const targetKey = config.target_language;
