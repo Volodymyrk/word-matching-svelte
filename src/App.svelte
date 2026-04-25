@@ -1,10 +1,10 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { fetchConfigs, fetchConfig, createRound } from './lib/vocab.js';
+  import { fetchConfigs, createRound } from './lib/vocab.js';
   import { logScore, getTopScores, getBestScore } from './lib/history.js';
 
   let configs = $state([]);
-  let selectedFile = $state('');
+  let selectedName = $state('');
   let displayCards = $state([]);
   let targetWords = $state([]);
   let score = $state(0);
@@ -21,14 +21,14 @@
   let topScores = $state([]);
 
   let gameActive = $derived(displayCards.length > 0);
-  let currentConfig = $derived(configs.find(c => c.file === selectedFile));
+  let currentConfig = $derived(configs.find(c => c.name === selectedName));
   let timerInterval = null;
   let wrongTimeout = null;
   let perfectFlashTimeout = null;
 
   onMount(async () => {
     configs = await fetchConfigs();
-    if (configs.length) selectedFile = configs[0].file;
+    if (configs.length) selectedName = configs[0].name;
   });
 
   onDestroy(() => {
@@ -58,7 +58,7 @@
     clearInterval(timerInterval);
     clearTimeout(wrongTimeout);
     clearTimeout(perfectFlashTimeout);
-    const config = await fetchConfig(selectedFile);
+    const config = currentConfig;
     const data = await createRound(config);
     displayCards = data.displayCards;
     targetWords = data.targetWords;
@@ -77,8 +77,7 @@
   }
 
   async function loadNextRound() {
-    const config = await fetchConfig(selectedFile);
-    const data = await createRound(config);
+    const data = await createRound(currentConfig);
     displayCards = data.displayCards;
     targetWords = data.targetWords;
     mistakesInSet = 0;
@@ -191,9 +190,9 @@
     </div>
 
     <div class="bottom-bar">
-      <select bind:value={selectedFile} onchange={() => loadRound()}>
+      <select bind:value={selectedName} onchange={() => loadRound()}>
         {#each configs as c}
-          <option value={c.file}>{c.name}</option>
+          <option value={c.name}>{c.name}</option>
         {/each}
       </select>
       <button class="btn" onclick={loadRound}>New round</button>
@@ -225,9 +224,9 @@
 
   {:else}
     <div class="start-screen">
-      <select bind:value={selectedFile}>
+      <select bind:value={selectedName}>
         {#each configs as c}
-          <option value={c.file}>{c.name}</option>
+          <option value={c.name}>{c.name}</option>
         {/each}
       </select>
       <button class="btn" onclick={loadRound}>Start game</button>

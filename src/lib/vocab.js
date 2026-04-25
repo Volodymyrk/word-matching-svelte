@@ -7,11 +7,6 @@ export async function fetchConfigs() {
   return res.json();
 }
 
-export async function fetchConfig(filename) {
-  const res = await fetch(`${base}configs/${filename}`);
-  return res.json();
-}
-
 async function loadAllPairs(config) {
   const res = await fetch(`${base}configs/${config.vocab_file}`);
   const data = await res.json();
