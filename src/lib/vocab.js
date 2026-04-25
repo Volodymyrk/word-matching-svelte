@@ -1,23 +1,46 @@
-/** Load game configs and vocab, create rounds. Port of vocab.py. */
-
 const base = import.meta.env.BASE_URL;
 
-export async function fetchConfigs() {
+export async function fetchLessons() {
   const res = await fetch(`${base}configs/index.json`);
   return res.json();
 }
 
-async function loadAllPairs(config) {
-  const res = await fetch(`${base}configs/${config.vocab_file}`);
+// Returns sections for a lesson: [{ id, wordCount }, ...]
+// id format: "lessonKey/sectionKey"
+export async function fetchSections(lesson) {
+  const res  = await fetch(`${base}configs/${lesson.vocab_file}`);
   const data = await res.json();
-  const baseKey = config.base_language;
-  const targetKey = config.target_language;
+  const sections = [];
+  for (const [lk, lv] of Object.entries(data)) {
+    for (const [sk, words] of Object.entries(lv)) {
+      sections.push({ id: `${lk}/${sk}`, wordCount: words.length });
+    }
+  }
+  return sections;
+}
+
+async function loadPairs(config, sectionId = null) {
+  const res  = await fetch(`${base}configs/${config.vocab_file}`);
+  const data = await res.json();
+  const bk = config.base_language;
+  const tk = config.target_language;
   const pairs = [];
-  for (const lesson of Object.values(data)) {
-    for (const section of Object.values(lesson)) {
-      for (const item of section) {
-        if (item[baseKey] !== undefined && item[targetKey] !== undefined) {
-          pairs.push({ base: item[baseKey], target: item[targetKey] });
+
+  if (sectionId) {
+    const [lk, sk] = sectionId.split('/');
+    const words = data[lk]?.[sk] || [];
+    for (const w of words) {
+      if (w[bk] !== undefined && w[tk] !== undefined) {
+        pairs.push({ base: w[bk], target: w[tk] });
+      }
+    }
+  } else {
+    for (const lv of Object.values(data)) {
+      for (const words of Object.values(lv)) {
+        for (const w of words) {
+          if (w[bk] !== undefined && w[tk] !== undefined) {
+            pairs.push({ base: w[bk], target: w[tk] });
+          }
         }
       }
     }
@@ -34,7 +57,7 @@ function sample(arr, n) {
   return a.slice(0, n);
 }
 
-// left/top are card *centers* (card CSS uses translateX(-50%))
+// left/top are card *centers* (CSS uses translateX(-50%))
 const GRID = [
   { left: '20%', top: '15%' },
   { left: '50%', top: '10%' },
@@ -44,19 +67,21 @@ const GRID = [
   { left: '82%', top: '58%' },
 ];
 
-export async function createRound(config) {
-  let pairs = await loadAllPairs(config);
+// sectionId: "lessonKey/sectionKey" for section play, null for all-words final round
+export async function createRound(config, sectionId = null) {
+  let pairs = await loadPairs(config, sectionId);
   while (pairs.length < 6) pairs = [...pairs, ...pairs];
-  const chosen = sample(pairs, 6);
+  const chosen        = sample(pairs, 6);
   const targetIndices = sample([0, 1, 2, 3, 4, 5], 3).sort((a, b) => a - b);
-  const targetWords = targetIndices.map(i => chosen[i].target);
-  const positions = sample(GRID, 6);
-  const displayCards = chosen.map((pair, i) => ({
-    id: i,
-    base: pair.base,
+  const targetWords   = targetIndices.map(i => chosen[i].target);
+  const positions     = sample(GRID, 6);
+  const displayCards  = chosen.map((pair, i) => ({
+    id:     i,
+    base:   pair.base,
     target: pair.target,
-    left: positions[i].left,
-    top: positions[i].top,
+    left:   positions[i].left,
+    top:    positions[i].top,
+    rot:    (Math.random() - 0.5) * 8,
   }));
   return { displayCards, targetWords };
 }

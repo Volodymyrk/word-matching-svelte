@@ -1,121 +1,57 @@
 [
   {
-    "name": "English – German",
+    "id": "la1",
+    "name": "Latein Lektion 1",
+    "vocab_file": "latin_1.json",
+    "languages": ["german", "latin"],
+    "round_seconds": 60,
+    "combo_seconds": 2.0
+  },
+  {
+    "id": "la2",
+    "name": "Latein Lektion 2",
+    "vocab_file": "latin_2.json",
+    "languages": ["german", "latin"],
+    "round_seconds": 60,
+    "combo_seconds": 2.0
+  },
+  {
+    "id": "la3",
+    "name": "Latein Lektion 3",
+    "vocab_file": "latin_3.json",
+    "languages": ["german", "latin"],
+    "round_seconds": 60,
+    "combo_seconds": 2.0
+  },
+  {
+    "id": "la4",
+    "name": "Latein Lektion 4",
+    "vocab_file": "latin_4.json",
+    "languages": ["german", "latin"],
+    "round_seconds": 60,
+    "combo_seconds": 2.0
+  },
+  {
+    "id": "la5",
+    "name": "Latein Lektion 5",
+    "vocab_file": "latin_5.json",
+    "languages": ["german", "latin"],
+    "round_seconds": 60,
+    "combo_seconds": 2.0
+  },
+  {
+    "id": "de1",
+    "name": "Deutsch Lektion 1",
     "vocab_file": "german_1.json",
-    "base_language": "german",
-    "target_language": "english",
+    "languages": ["german", "english"],
     "round_seconds": 60,
     "combo_seconds": 2.0
   },
   {
-    "name": "English – German 2",
+    "id": "de2",
+    "name": "Deutsch Lektion 2",
     "vocab_file": "german_2.json",
-    "base_language": "german",
-    "target_language": "english",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "German – English 2",
-    "vocab_file": "german_2.json",
-    "base_language": "english",
-    "target_language": "german",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "German – Latin 1",
-    "vocab_file": "latin_1.json",
-    "base_language": "latin",
-    "target_language": "german",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "German – Latin 2",
-    "vocab_file": "latin_2.json",
-    "base_language": "latin",
-    "target_language": "german",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "German – Latin 3",
-    "vocab_file": "latin_3.json",
-    "base_language": "latin",
-    "target_language": "german",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "German – Latin 4",
-    "vocab_file": "latin_4.json",
-    "base_language": "latin",
-    "target_language": "german",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "German – Latin 5",
-    "vocab_file": "latin_5.json",
-    "base_language": "latin",
-    "target_language": "german",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "German – Latin (complete)",
-    "vocab_file": "latin_complete.json",
-    "base_language": "latin",
-    "target_language": "german",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "Latin – German 1",
-    "vocab_file": "latin_1.json",
-    "base_language": "german",
-    "target_language": "latin",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "Latin – German 2",
-    "vocab_file": "latin_2.json",
-    "base_language": "german",
-    "target_language": "latin",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "Latin – German 3",
-    "vocab_file": "latin_3.json",
-    "base_language": "german",
-    "target_language": "latin",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "Latin – German 4",
-    "vocab_file": "latin_4.json",
-    "base_language": "german",
-    "target_language": "latin",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "Latin – German 5",
-    "vocab_file": "latin_5.json",
-    "base_language": "german",
-    "target_language": "latin",
-    "round_seconds": 60,
-    "combo_seconds": 2.0
-  },
-  {
-    "name": "Latin – German (complete)",
-    "vocab_file": "latin_complete.json",
-    "base_language": "german",
-    "target_language": "latin",
+    "languages": ["german", "english"],
     "round_seconds": 60,
     "combo_seconds": 2.0
   }
