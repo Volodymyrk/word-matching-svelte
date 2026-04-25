@@ -39,13 +39,14 @@ function sample(arr, n) {
   return a.slice(0, n);
 }
 
+// left/top are card *centers* (card CSS uses translateX(-50%))
 const GRID = [
-  { left: '10%', top: '15%' },
-  { left: '45%', top: '12%' },
-  { left: '75%', top: '18%' },
-  { left: '15%', top: '45%' },
-  { left: '55%', top: '42%' },
-  { left: '80%', top: '48%' },
+  { left: '20%', top: '15%' },
+  { left: '50%', top: '10%' },
+  { left: '80%', top: '18%' },
+  { left: '22%', top: '55%' },
+  { left: '55%', top: '50%' },
+  { left: '82%', top: '58%' },
 ];
 
 export async function createRound(config) {

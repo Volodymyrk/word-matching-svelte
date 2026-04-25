@@ -326,6 +326,7 @@
 
   .base-card {
     position: absolute;
+    transform: translateX(-50%);
     cursor: pointer;
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
     transition: box-shadow .15s;
