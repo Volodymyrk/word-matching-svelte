@@ -22,17 +22,9 @@
 
   let gameActive = $derived(displayCards.length > 0);
   let currentConfig = $derived(configs.find(c => c.file === selectedFile));
-  let configSubtitle = $derived(
-    currentConfig
-      ? `${cap(currentConfig.base_language)} on board → match ${cap(currentConfig.target_language)} below`
-      : ''
-  );
-
   let timerInterval = null;
   let wrongTimeout = null;
   let perfectFlashTimeout = null;
-
-  function cap(s) { return s ? s[0].toUpperCase() + s.slice(1) : ''; }
 
   onMount(async () => {
     configs = await fetchConfigs();
@@ -159,20 +151,10 @@
 
 <div class="page">
   {#if gameActive}
-    <div class="header">
-      <h1>Find the words</h1>
-      <div class="stats">
-        <span>Score: <strong style="color:#059669">{score}</strong></span>
-        <span>Time: <strong style="color:#dc2626">{remainingSeconds}s</strong></span>
-      </div>
-      <select bind:value={selectedFile} onchange={() => loadRound()}>
-        {#each configs as c}
-          <option value={c.file}>{c.name}</option>
-        {/each}
-      </select>
+    <div class="top-bar">
+      <span>Score: <strong class="score-val">{score}</strong></span>
+      <span>Time: <strong class="time-val">{remainingSeconds}s</strong></span>
     </div>
-
-    <p class="subtitle">{configSubtitle}</p>
 
     {#if comboRestartKey > 0}
       {#key comboRestartKey}
@@ -208,7 +190,14 @@
       {/each}
     </div>
 
-    <button class="btn" onclick={loadRound} style="margin-top:1.5rem">New round</button>
+    <div class="bottom-bar">
+      <select bind:value={selectedFile} onchange={() => loadRound()}>
+        {#each configs as c}
+          <option value={c.file}>{c.name}</option>
+        {/each}
+      </select>
+      <button class="btn" onclick={loadRound}>New round</button>
+    </div>
 
     {#if showEndPopup}
       <div class="overlay" onclick={closeEndPopup}>
@@ -235,41 +224,62 @@
     {/if}
 
   {:else}
-    <h1>Word matching</h1>
-    <p style="color:#6b7280;margin-bottom:1rem">Pick a game config and start</p>
-    <select bind:value={selectedFile}>
-      {#each configs as c}
-        <option value={c.file}>{c.name}</option>
-      {/each}
-    </select>
-    <br />
-    <button class="btn" onclick={loadRound} style="margin-top:1rem">Start game</button>
+    <div class="start-screen">
+      <select bind:value={selectedFile}>
+        {#each configs as c}
+          <option value={c.file}>{c.name}</option>
+        {/each}
+      </select>
+      <button class="btn" onclick={loadRound}>Start game</button>
+    </div>
   {/if}
 </div>
 
 <style>
+  :global(body) { margin: 0; }
+
   .page {
-    max-width: 900px;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0.75rem;
     font-family: system-ui, sans-serif;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
   }
 
-  h1 { font-size: 1.6rem; color: #1f2937; margin: 0 0 .25rem; }
   h2 { margin: 0 0 .5rem; }
   h3 { margin: 1rem 0 .5rem; font-size: 1rem; }
 
-  .header {
+  .top-bar {
     display: flex;
+    gap: 1.25rem;
     align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: .75rem;
+    padding: .4rem 0 .5rem;
+    font-size: 1rem;
   }
 
-  .stats { display: flex; gap: 1rem; }
+  .score-val { color: #059669; }
+  .time-val  { color: #dc2626; }
 
-  .subtitle { color: #6b7280; font-size: .9rem; margin: 0 0 .75rem; }
+  .start-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .bottom-bar {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+    padding-top: .75rem;
+    flex-wrap: wrap;
+  }
+
+  .bottom-bar select { flex: 1; min-width: 0; }
 
   .combo-wrap {
     height: 10px;
@@ -295,8 +305,9 @@
   .board {
     position: relative;
     width: 100%;
-    height: 400px;
-    margin-bottom: 2rem;
+    flex: 1;
+    min-height: 280px;
+    margin-bottom: 1rem;
   }
 
   .card {
@@ -345,7 +356,7 @@
 
   .target-card {
     background: linear-gradient(135deg, #059669, #047857);
-    min-width: 140px;
+    min-width: 80px;
     text-align: center;
     cursor: default;
   }
@@ -369,7 +380,8 @@
     border-radius: 8px;
     border: 1px solid #d1d5db;
     font-size: .95rem;
-    width: 220px;
+    width: 100%;
+    max-width: 320px;
   }
 
   .overlay {
