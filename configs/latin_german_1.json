@@ -1,9 +1,0 @@
-{
-  "file": "latin_german_1.json",
-  "name": "Latin – German 1",
-  "vocab_file": "latin_1.json",
-  "base_language": "german",
-  "target_language": "latin",
-  "round_seconds": 60,
-  "combo_seconds": 2.0
-}

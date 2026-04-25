@@ -1,6 +1,6 @@
 {
   "lesson_1": {
-    "section_A": [
+    "section_1": [
       {"latin": "ecce", "grammar": "", "german": "Schau!"},
       {"latin": "ibi", "grammar": "Adv.", "german": "dort"},
       {"latin": "esse", "grammar": "", "german": "sein"},
@@ -15,7 +15,7 @@
       {"latin": "cōgitāre", "grammar": "", "german": "denken"},
       {"latin": "clāmāre", "grammar": "", "german": "laut rufen"}
     ],
-    "section_B": [
+    "section_2": [
       {"latin": "iam", "grammar": "Adv.", "german": "schon"},
       {"latin": "adesse", "grammar": "", "german": "da sein"},
       {"latin": "adest", "grammar": "3. Pers. Sg.", "german": "er ist da"},
@@ -28,14 +28,12 @@
       {"latin": "sed", "grammar": "", "german": "aber"},
       {"latin": "nōndum", "grammar": "Adv.", "german": "noch nicht"},
       {"latin": "cūr?", "grammar": "", "german": "warum?"},
-      {"latin": "nōn", "grammar": "", "german": "nicht"}
+      {"latin": "nōn", "grammar": "", "german": "nicht"},
+      {"latin": "dēbēre", "grammar": "", "german": "müssen"}
     ],
-    "section_C": [
-      {"latin": "dēbēre", "grammar": "", "german": "müssen"},
+    "section_3": [
       {"latin": "dubitāre", "grammar": "", "german": "zögern"},
-      {"latin": "gaudēre", "grammar": "", "german": "sich freuen"}
-    ],
-    "section_T": [
+      {"latin": "gaudēre", "grammar": "", "german": "sich freuen"},
       {"latin": "equus", "grammar": "m", "german": "das Pferd"},
       {"latin": "spectāre", "grammar": "", "german": "betrachten"},
       {"latin": "audēre", "grammar": "", "german": "wagen"},
