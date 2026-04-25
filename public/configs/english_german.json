@@ -1,0 +1,9 @@
+{
+  "file": "english_german.json",
+  "name": "English – German",
+  "vocab_file": "german_1.json",
+  "base_language": "german",
+  "target_language": "english",
+  "round_seconds": 60,
+  "combo_seconds": 2.0
+}

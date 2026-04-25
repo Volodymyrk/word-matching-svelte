@@ -1,0 +1,9 @@
+{
+  "file": "german_latin_complete.json",
+  "name": "German – Latin (complete)",
+  "vocab_file": "latin_complete.json",
+  "base_language": "latin",
+  "target_language": "german",
+  "round_seconds": 60,
+  "combo_seconds": 2.0
+}
