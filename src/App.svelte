@@ -1,14 +1,15 @@
 <script>
   import { onMount, onDestroy, tick } from 'svelte';
-  import { fetchGlobals, fetchLessons, fetchSections, createRound } from './lib/vocab.js';
+  import { fetchGlobals, fetchLessons, fetchSections, fetchSectionWords, createRound } from './lib/vocab.js';
   import { logScore, getBestScore, getProgress, markPlay } from './lib/history.js';
   import { dirLabel, roman } from './lib/theme.js';
   import ScreenLessons  from './lib/ScreenLessons.svelte';
   import ScreenSaga     from './lib/ScreenSaga.svelte';
+  import ScreenPreview  from './lib/ScreenPreview.svelte';
   import ScreenComplete from './lib/ScreenComplete.svelte';
 
   // ── Routing ────────────────────────────────────────────────────────────────
-  let screen          = $state('lessons'); // 'lessons' | 'saga' | 'game' | 'complete'
+  let screen          = $state('lessons'); // 'lessons' | 'saga' | 'preview' | 'game' | 'complete'
   let lessons         = $state([]);
   let sectionsMap     = $state({});        // lessonId → sections[]
   let sections        = $state([]);        // sections for selected lesson
@@ -16,6 +17,7 @@
   let selectedSection = $state(null);      // { id, wordCount } or { id: 'final', isFinal: true }
   let selectedDir     = $state(0);
   let progress        = $state({});
+  let previewWords    = $state([]);
   let lastScore       = $state(0);
   let lastBaseScore   = $state(0);
   let lastBonusSecs   = $state(0);
@@ -105,9 +107,20 @@
     screen = 'saga';
   }
 
-  function startGame(section, dir) {
+  async function startGame(section, dir) {
     selectedSection = section;
     selectedDir     = dir;
+    const sectionId = section.isFinal ? null : section.id;
+    const config = {
+      vocab_file:      selectedLesson.vocab_file,
+      base_language:   selectedLesson.languages[dir],
+      target_language: selectedLesson.languages[1 - dir],
+    };
+    previewWords = await fetchSectionWords(config, sectionId);
+    screen = 'preview';
+  }
+
+  function startGameFromPreview() {
     screen = 'game';
     loadRound();
   }
@@ -266,6 +279,16 @@
     starThresholds={globals?.star_thresholds ?? [1, 10, 20]}
     onBack={() => screen = 'lessons'}
     onStart={startGame}
+  />
+
+{:else if screen === 'preview'}
+  <ScreenPreview
+    lesson={selectedLesson}
+    {sectionLabel}
+    dir={selectedDir}
+    words={previewWords}
+    onBack={() => screen = 'saga'}
+    onStart={startGameFromPreview}
   />
 
 {:else if screen === 'game'}

@@ -72,6 +72,10 @@ const GRID = [
   { left: '82%', top: '58%' },
 ];
 
+export async function fetchSectionWords(config, sectionId = null) {
+  return loadPairs(config, sectionId);
+}
+
 // sectionId: "lessonKey/sectionKey" for section play, null for all-words final round
 export async function createRound(config, sectionId = null) {
   let pairs = await loadPairs(config, sectionId);
