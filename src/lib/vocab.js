@@ -1,5 +1,10 @@
 const base = import.meta.env.BASE_URL;
 
+export async function fetchGlobals() {
+  const res = await fetch(`${base}configs/globals.json`);
+  return res.json();
+}
+
 export async function fetchLessons() {
   const res = await fetch(`${base}configs/index.json`);
   return res.json();

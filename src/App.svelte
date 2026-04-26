@@ -1,8 +1,8 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import { fetchLessons, fetchSections, createRound } from './lib/vocab.js';
+  import { onMount, onDestroy, tick } from 'svelte';
+  import { fetchGlobals, fetchLessons, fetchSections, createRound } from './lib/vocab.js';
   import { logScore, getBestScore, getProgress, markPlay } from './lib/history.js';
-  import { dirLabel } from './lib/theme.js';
+  import { dirLabel, roman } from './lib/theme.js';
   import ScreenLessons  from './lib/ScreenLessons.svelte';
   import ScreenSaga     from './lib/ScreenSaga.svelte';
   import ScreenComplete from './lib/ScreenComplete.svelte';
@@ -17,9 +17,19 @@
   let selectedDir     = $state(0);
   let progress        = $state({});
   let lastScore       = $state(0);
+  let lastBaseScore   = $state(0);
+  let lastBonusSecs   = $state(0);
+  let lastNextLabel   = $state('');
   let isNewBest       = $state(false);
+  let globals         = $state(null);
 
   // ── Game state ─────────────────────────────────────────────────────────────
+  const BG_COUNT = 6;
+  function randomBg() {
+    const i = Math.floor(Math.random() * BG_COUNT) + 1;
+    return `${import.meta.env.BASE_URL}images/bg_${String(i).padStart(2, '0')}.webp`;
+  }
+  let boardBg          = $state(randomBg());
   let displayCards     = $state([]);
   let targetWords      = $state([]);
   let score            = $state(0);
@@ -27,16 +37,19 @@
   let wrongCardId      = $state(-1);
   let mistakesInSet    = $state(0);
   let wrongInRound     = $state(0);
-  let showPerfectFlash = $state(false);
-  let pendingRemoveCardId = $state(-1);
-  let pendingRemoveTarget = $state('');
+  let correctClicks    = $state(0);
+  let wrongWords       = $state([]);  // { clicked, correct }[]
+  let setsCompleted    = $state(0);
   let comboActive      = $state(false);
+  let comboPrimed      = $state(false);
   let comboRestartKey  = $state(0);
   let comboDurationMs  = $state(1000);
 
   // ── Derived ────────────────────────────────────────────────────────────────
-  const livesLeft   = $derived(Math.max(0, 3 - wrongInRound));
-  const setProgress = $derived(3 - targetWords.length);
+  const livesLeft   = $derived(Math.max(0, (globals?.lives ?? 3) - wrongInRound));
+  const livesRange  = $derived(Array.from({ length: globals?.lives ?? 3 }, (_, i) => i));
+  const setsPerRound = $derived(globals?.sets_per_round ?? 6);
+  const setProgress  = $derived(setsCompleted);
 
   const currentDirLabel = $derived.by(() => {
     if (!selectedLesson || selectedDir == null) return '';
@@ -58,8 +71,6 @@
       vocab_file:      selectedLesson.vocab_file,
       base_language:   selectedLesson.languages[selectedDir],
       target_language: selectedLesson.languages[1 - selectedDir],
-      round_seconds:   selectedLesson.round_seconds ?? 60,
-      combo_seconds:   selectedLesson.combo_seconds ?? 2,
     };
   });
 
@@ -70,12 +81,12 @@
     return `Abschnitt ${idx + 1}`;
   });
 
-  let timerInterval       = null;
-  let wrongTimeout        = null;
-  let perfectFlashTimeout = null;
+  let timerInterval        = null;
+  let wrongTimeout         = null;
+  let comboPrimedTimeout   = null;
 
   onMount(async () => {
-    lessons  = await fetchLessons();
+    [globals, lessons] = await Promise.all([fetchGlobals(), fetchLessons()]);
     progress = getProgress();
     const pairs = await Promise.all(lessons.map(async l => [l.id, await fetchSections(l)]));
     sectionsMap = Object.fromEntries(pairs);
@@ -84,7 +95,7 @@
   onDestroy(() => {
     clearInterval(timerInterval);
     clearTimeout(wrongTimeout);
-    clearTimeout(perfectFlashTimeout);
+    clearTimeout(comboPrimedTimeout);
   });
 
   // ── Navigation ─────────────────────────────────────────────────────────────
@@ -104,13 +115,14 @@
   function quitToSaga() {
     clearInterval(timerInterval);
     clearTimeout(wrongTimeout);
-    clearTimeout(perfectFlashTimeout);
     displayCards = [];
     targetWords  = [];
     screen = 'saga';
   }
 
   function handleContinue() {
+    const configName = `${selectedLesson.id}-${selectedSection.id}-${selectedDir}`;
+    logScore(lastScore, configName);
     markPlay(selectedLesson.id, selectedSection.id, selectedDir, lastScore);
     progress = getProgress();
     screen = 'saga';
@@ -121,13 +133,27 @@
     loadRound();
   }
 
+  function computeNextLabel() {
+    if (selectedSection?.isFinal) return '';
+    const idx = sections.findIndex(s => s.id === selectedSection?.id);
+    if (idx === -1) return '';
+    if (selectedDir === 1) {
+      return `${roman(idx)} · ${dirLabel(selectedLesson, 0)}`;
+    } else if (idx + 1 < sections.length) {
+      return `${roman(idx + 1)} · ${dirLabel(selectedLesson, 1)}`;
+    }
+    return 'Finalrunde';
+  }
+
   function endRound() {
     clearInterval(timerInterval);
-    lastScore = score;
+    lastBonusSecs = remainingSeconds;
+    lastBaseScore = score;
+    lastScore     = score + Math.floor(remainingSeconds / 5);
+    lastNextLabel = computeNextLabel();
     const configName = `${selectedLesson.id}-${selectedSection.id}-${selectedDir}`;
     const best = getBestScore(configName);
-    isNewBest = score > best && score > 0;
-    logScore(score, configName);
+    isNewBest = lastScore > best && lastScore > 0;
     displayCards = [];
     targetWords  = [];
     screen = 'complete';
@@ -146,34 +172,43 @@
   async function loadRound() {
     clearInterval(timerInterval);
     clearTimeout(wrongTimeout);
-    clearTimeout(perfectFlashTimeout);
     const config    = gameConfig;
     const sectionId = selectedSection?.isFinal ? null : selectedSection?.id;
     const data      = await createRound(config, sectionId);
     displayCards      = data.displayCards;
     targetWords       = data.targetWords;
     score             = 0;
-    remainingSeconds  = config.round_seconds;
+    setsCompleted     = 0;
+    remainingSeconds  = globals?.round_seconds ?? 60;
+    boardBg           = randomBg();
     wrongCardId       = -1;
     mistakesInSet     = 0;
     wrongInRound      = 0;
-    showPerfectFlash  = false;
-    pendingRemoveCardId = -1;
-    pendingRemoveTarget = '';
+    correctClicks     = 0;
+    wrongWords        = [];
     comboActive       = false;
+    comboPrimed       = false;
     comboRestartKey   = 0;
-    comboDurationMs   = Math.round(config.combo_seconds * 1000);
+    comboDurationMs   = Math.round((globals?.combo_seconds ?? 2) * 1000);
+    clearTimeout(comboPrimedTimeout);
     startTimer();
   }
 
   async function loadNextRound() {
+    setsCompleted++;
+    if (setsCompleted >= setsPerRound) { endRound(); return; }
+    await tick();
     const sectionId = selectedSection?.isFinal ? null : selectedSection?.id;
     const data      = await createRound(gameConfig, sectionId);
     displayCards    = data.displayCards;
     targetWords     = data.targetWords;
     mistakesInSet   = 0;
-    comboActive     = false;
-    comboRestartKey = 0;
+    comboPrimed     = false;
+    clearTimeout(comboPrimedTimeout);
+    if (comboActive) {
+      comboDurationMs = Math.round((globals?.combo_seconds ?? 2) * 1000 + (globals?.combo_new_set_bonus_seconds ?? 5) * 1000);
+      comboRestartKey++;
+    }
   }
 
   function clickCard(card) {
@@ -181,44 +216,43 @@
     clearTimeout(wrongTimeout);
 
     if (!targetWords.includes(card.target)) {
-      score--;
+      score += globals?.score_wrong ?? -1;
       mistakesInSet++;
       wrongInRound++;
       wrongCardId  = card.id;
       comboActive  = false;
+      comboPrimed  = false;
       comboRestartKey = 0;
-      wrongTimeout = setTimeout(() => { wrongCardId = -1; }, 500);
+      clearTimeout(comboPrimedTimeout);
+      wrongTimeout = setTimeout(() => { wrongCardId = -1; }, globals?.wrong_flash_ms ?? 500);
+      if (!wrongWords.some(w => w.clicked === card.base)) {
+        wrongWords = [...wrongWords, { clicked: card.base, correct: targetWords[0] }];
+      }
       return;
     }
 
-    score += comboActive ? 2 : 1;
-    comboActive = true;
-    comboRestartKey++;
-    remainingSeconds++;
-
-    const isLastTarget = targetWords.length === 1;
-    const perfectSet   = isLastTarget && mistakesInSet === 0;
-
-    if (perfectSet) {
-      showPerfectFlash    = true;
-      pendingRemoveCardId = card.id;
-      pendingRemoveTarget = card.target;
-      perfectFlashTimeout = setTimeout(() => {
-        displayCards     = displayCards.filter(c => c.id !== pendingRemoveCardId);
-        targetWords      = targetWords.filter(w => w !== pendingRemoveTarget);
-        showPerfectFlash = false;
-        pendingRemoveCardId = -1;
-        pendingRemoveTarget = '';
-        loadNextRound();
-      }, 800);
+    correctClicks++;
+    const inCombo     = comboPrimed || comboActive;
+    const comboDurMs  = Math.round((globals?.combo_seconds ?? 2) * 1000);
+    score += inCombo ? (globals?.score_combo ?? 2) : (globals?.score_correct ?? 1);
+    clearTimeout(comboPrimedTimeout);
+    if (inCombo) {
+      comboActive     = true;
+      comboPrimed     = true;
+      comboDurationMs = comboDurMs;
+      comboRestartKey++;
     } else {
-      displayCards = displayCards.filter(c => c.id !== card.id);
-      targetWords  = targetWords.filter(w => w !== card.target);
-      if (targetWords.length === 0) loadNextRound();
+      comboPrimed = true;
+      comboPrimedTimeout = setTimeout(() => { comboPrimed = false; }, comboDurMs);
     }
+    remainingSeconds += globals?.timer_bonus_per_correct ?? 1;
+
+    displayCards = displayCards.filter(c => c.id !== card.id);
+    targetWords  = targetWords.filter(w => w !== card.target);
+    if (targetWords.length === 0) loadNextRound();
   }
 
-  function comboExpired() { comboActive = false; }
+  function comboExpired() { comboActive = false; comboPrimed = false; }
 </script>
 
 {#if screen === 'lessons'}
@@ -229,6 +263,7 @@
     lesson={selectedLesson}
     {sections}
     {progress}
+    starThresholds={globals?.star_thresholds ?? [1, 10, 20]}
     onBack={() => screen = 'lessons'}
     onStart={startGame}
   />
@@ -244,7 +279,7 @@
         </svg>
       </button>
       <div class="progress-bar">
-        {#each [0, 1, 2] as i}
+        {#each Array.from({ length: setsPerRound }, (_, i) => i) as i}
           <div class="chunk" class:filled={i < setProgress}></div>
         {/each}
       </div>
@@ -258,7 +293,7 @@
     <div class="meta-bar">
       <div class="dir-badge">{currentDirLabel}</div>
       <div class="hearts">
-        {#each [0, 1, 2] as i}
+        {#each livesRange as i}
           <svg width="20" height="18" viewBox="0 0 20 18">
             <path d="M10 16C10 16 2 11 2 6a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 5-8 10-8 10z"
               fill={i < livesLeft ? '#E8654A' : 'transparent'}
@@ -269,16 +304,20 @@
     </div>
 
     <!-- Combo bar -->
-    {#if comboRestartKey > 0}
+    <div class="combo-wrap">
       {#key comboRestartKey}
-        <div class="combo-wrap">
-          <div class="combo-bar" style="animation-duration:{comboDurationMs}ms" onanimationend={comboExpired}></div>
-        </div>
+        <div
+          class="combo-bar"
+          class:active={comboRestartKey > 0}
+          style={comboRestartKey > 0 ? `animation-duration:${comboDurationMs}ms` : ''}
+          onanimationend={comboExpired}
+        ></div>
       {/key}
-    {/if}
+    </div>
 
     <!-- Board -->
     <div class="board">
+      <div class="board-bg" style="background-image: url('{boardBg}')"></div>
       <div class="board-hint">TIPP · finde die 3 Paare</div>
       {#each displayCards as card (card.id)}
         <div class="card-anchor" style="left:{card.left}; top:{card.top}">
@@ -298,7 +337,7 @@
     </div>
 
     <!-- Target panel -->
-    <div class="target-panel" class:perfect-flash={showPerfectFlash}>
+    <div class="target-panel">
       <div class="target-label">{bottomLabel}</div>
       <div class="target-row">
         {#each targetWords as word}
@@ -319,8 +358,15 @@
     lesson={selectedLesson}
     {sectionLabel}
     dir={selectedDir}
-    score={lastScore}
+    baseScore={lastBaseScore}
+    bonusSecs={lastBonusSecs}
+    roundSeconds={globals?.round_seconds ?? 60}
+    wrongWords={wrongWords}
+    correctClicks={correctClicks}
+    wrongClicks={wrongInRound}
     {isNewBest}
+    starThresholds={globals?.star_thresholds ?? [1, 10, 20]}
+    nextLabel={lastNextLabel}
     onContinue={handleContinue}
     onRetry={handleRetry}
   />
@@ -440,8 +486,12 @@
   }
   .combo-bar {
     height: 100%;
-    background: #E8654A;
+    background: transparent;
     border-radius: 6px;
+    width: 0%;
+  }
+  .combo-bar.active {
+    background: #E8654A;
     width: 100%;
     animation: drain linear forwards;
   }
@@ -452,13 +502,26 @@
     width: 100%;
     flex: 1;
     min-height: 280px;
-    background-image: repeating-linear-gradient(135deg, transparent 0 18px, rgba(27,20,16,0.04) 18px 19px);
     background-color: #FFFCF5;
     border: 2.5px solid #1B1410;
     border-radius: 18px;
     box-shadow: 4px 4px 0 #1B1410;
     overflow: hidden;
     margin-bottom: 0.75rem;
+  }
+
+  .board-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .board-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(251, 246, 236, 0.5);
   }
 
   .board-hint {
@@ -535,7 +598,7 @@
     transition: background 200ms;
     margin-bottom: 0.5rem;
   }
-  .target-panel.perfect-flash { background: #86efac; }
+
 
   .target-label {
     font-family: 'Geist Mono', ui-monospace, monospace;

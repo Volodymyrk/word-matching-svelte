@@ -1,49 +1,51 @@
 <script>
-  import { roman, dirLabel, sectionLocked, finalLocked } from './theme.js';
+  import { roman, dirLabel, levelLocked, finalLocked } from './theme.js';
 
-  let { lesson, sections, progress, onBack, onStart } = $props();
+  let { lesson, sections, progress, starThresholds = [1, 10, 20], onBack, onStart } = $props();
 
-  let selectedId = $state(null);
+  let finalSelected = $state(false);
   const FINAL = 'final';
 
-  const isFinalUnlocked = $derived(!finalLocked(lesson, sections, progress));
-
-  function secDone(sectionId, dir) {
+  function isDone(sectionId, dir) {
     return !!progress[lesson.id]?.[sectionId]?.[String(dir)]?.done;
   }
 
-  function tapNode(id, locked) {
-    if (locked) return;
-    selectedId = selectedId === id ? null : id;
+  function bestScore(sectionId, dir) {
+    return progress[lesson.id]?.[sectionId]?.[String(dir)]?.best ?? -1;
   }
 
-  const selectedSectionObj = $derived.by(() => {
-    if (!selectedId) return null;
-    if (selectedId === FINAL) return { id: FINAL, isFinal: true };
-    return sections.find(s => s.id === selectedId) ?? null;
-  });
-
-  function startPlay(dir) {
-    if (!selectedSectionObj) return;
-    onStart(selectedSectionObj, dir);
-    selectedId = null;
+  function starsFor(sectionId, dir) {
+    const b = bestScore(sectionId, dir);
+    return b >= starThresholds[2] ? 3 : b >= starThresholds[1] ? 2 : b >= starThresholds[0] ? 1 : 0;
   }
 
-  const currentId = $derived.by(() => {
-    for (let i = 0; i < sections.length; i++) {
-      if (sectionLocked(lesson, i, sections, progress)) continue;
-      if (!secDone(sections[i].id, 0) || !secDone(sections[i].id, 1)) return sections[i].id;
+  function hasEnoughStars(sectionId, dir) {
+    return bestScore(sectionId, dir) >= starThresholds[1];
+  }
+
+  const isFinalUnlocked = $derived(!finalLocked(lesson, sections, progress, starThresholds));
+
+  // Flat level list: for each section, dir=1 first (target→source), then dir=0 (source→target)
+  const levels = $derived(sections.flatMap((section, i) => [
+    { section, sectionIdx: i, dir: 1 },
+    { section, sectionIdx: i, dir: 0 },
+  ]));
+
+  const currentLevelKey = $derived.by(() => {
+    for (const lv of levels) {
+      if (levelLocked(lesson, lv.sectionIdx, lv.dir, sections, progress, starThresholds)) continue;
+      if (!hasEnoughStars(lv.section.id, lv.dir)) return `${lv.section.id}:${lv.dir}`;
     }
-    if (isFinalUnlocked && (!secDone(FINAL, 0) || !secDone(FINAL, 1))) return FINAL;
+    if (isFinalUnlocked && (!isDone(FINAL, 0) || !isDone(FINAL, 1))) return FINAL;
     return null;
   });
 
-  const fd0      = $derived(secDone(FINAL, 0));
-  const fd1      = $derived(secDone(FINAL, 1));
+  const fd0      = $derived(isDone(FINAL, 0));
+  const fd1      = $derived(isDone(FINAL, 1));
   const fAllDone = $derived(fd0 && fd1);
-  const fCurrent = $derived(currentId === FINAL);
+  const fCurrent = $derived(currentLevelKey === FINAL);
   const fFill    = $derived(!isFinalUnlocked ? '#D9D0BD' : fAllDone ? '#7CA982' : fCurrent ? '#E8654A' : '#FFFCF5');
-  const fRow     = $derived(sections.length % 2 !== 0);
+  const fRow     = $derived(levels.length % 2 !== 0);
 </script>
 
 <div class="page">
@@ -60,15 +62,13 @@
   </div>
 
   <div class="saga">
-    {#each sections as section, i}
-      {@const locked    = sectionLocked(lesson, i, sections, progress)}
-      {@const d0done    = secDone(section.id, 0)}
-      {@const d1done    = secDone(section.id, 1)}
-      {@const allDone   = d0done && d1done}
-      {@const isCurrent = section.id === currentId}
-      {@const isSelected = section.id === selectedId}
-      {@const fill      = locked ? '#D9D0BD' : allDone ? '#7CA982' : isCurrent ? '#E8654A' : '#FFFCF5'}
-      {@const numColor  = allDone ? '#2F5A3D' : isCurrent ? '#FFF6E8' : '#1B1410'}
+    {#each levels as lv, i}
+      {@const locked    = levelLocked(lesson, lv.sectionIdx, lv.dir, sections, progress, starThresholds)}
+      {@const cleared   = hasEnoughStars(lv.section.id, lv.dir)}
+      {@const isCurrent = `${lv.section.id}:${lv.dir}` === currentLevelKey}
+      {@const fill      = locked ? '#D9D0BD' : cleared ? '#7CA982' : isCurrent ? '#E8654A' : '#FFFCF5'}
+      {@const numColor  = cleared ? '#2F5A3D' : isCurrent ? '#FFF6E8' : '#1B1410'}
+      {@const stars     = starsFor(lv.section.id, lv.dir)}
 
       <div class="node-row" class:right={i % 2 !== 0}>
         {#if isCurrent}
@@ -77,8 +77,7 @@
         <button
           class="node-btn"
           class:locked
-          class:selected={isSelected}
-          onclick={() => tapNode(section.id, locked)}
+          onclick={() => !locked && onStart(lv.section, lv.dir)}
         >
           <div class="hex-wrap">
             <svg width="88" height="96" viewBox="0 0 100 110" style="overflow:visible">
@@ -99,17 +98,26 @@
                   <path d="M8 11V8a4 4 0 1 1 8 0v3" stroke="#8A8070" stroke-width="2.2" stroke-linecap="round"/>
                 </svg>
               {:else}
-                <div class="hex-numeral" style="color:{numColor}">{roman(i)}</div>
+                <div class="hex-numeral" style="color:{numColor}">{roman(lv.sectionIdx)}</div>
               {/if}
             </div>
           </div>
           <div class="node-label" style="color:{locked ? '#8A8070' : '#1B1410'}">
-            Abschnitt {i + 1}
+            {dirLabel(lesson, lv.dir)}
           </div>
           {#if !locked}
-            <div class="play-dots">
-              <div class="dot" class:done={d0done} title={dirLabel(lesson, 0)}></div>
-              <div class="dot" class:done={d1done} title={dirLabel(lesson, 1)}></div>
+            <div class="level-stars">
+              {#each [0, 1, 2] as s}
+                <svg width="15" height="15" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.5l2.95 6.3 6.55.85-4.85 4.6 1.25 6.95L12 17.95 6.1 21.2l1.25-6.95L2.5 9.65l6.55-.85L12 2.5z"
+                    fill={s < stars ? '#F0B83D' : '#EDE5D5'}
+                    stroke={s < stars ? '#1B1410' : '#A89880'}
+                    stroke-width="1.4"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              {/each}
             </div>
           {/if}
         </button>
@@ -124,8 +132,7 @@
       <button
         class="node-btn"
         class:locked={!isFinalUnlocked}
-        class:selected={selectedId === FINAL}
-        onclick={() => tapNode(FINAL, !isFinalUnlocked)}
+        onclick={() => { if (isFinalUnlocked) finalSelected = !finalSelected; }}
       >
         <div class="magna" style="background:{fFill}">
           {#if !isFinalUnlocked}
@@ -141,26 +148,36 @@
           Finalrunde
         </div>
         {#if isFinalUnlocked}
-          <div class="play-dots">
-            <div class="dot" class:done={fd0} title={dirLabel(lesson, 0)}></div>
-            <div class="dot" class:done={fd1} title={dirLabel(lesson, 1)}></div>
+          <div class="level-stars">
+            {#each [0, 1, 2] as s}
+              <svg width="15" height="15" viewBox="0 0 24 24">
+                <path
+                  d="M12 2.5l2.95 6.3 6.55.85-4.85 4.6 1.25 6.95L12 17.95 6.1 21.2l1.25-6.95L2.5 9.65l6.55-.85L12 2.5z"
+                  fill={s < Math.max(starsFor(FINAL, 0), starsFor(FINAL, 1)) ? '#F0B83D' : '#EDE5D5'}
+                  stroke={s < Math.max(starsFor(FINAL, 0), starsFor(FINAL, 1)) ? '#1B1410' : '#A89880'}
+                  stroke-width="1.4"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            {/each}
           </div>
         {/if}
       </button>
     </div>
   </div>
 
-  <!-- Direction picker panel -->
-  {#if selectedSectionObj}
-    {@const panelLabel = selectedId === FINAL
-      ? 'Finalrunde'
-      : `Abschnitt ${sections.findIndex(s => s.id === selectedId) + 1}`}
+  <!-- Direction picker panel (final round only) -->
+  {#if finalSelected}
     <div class="dir-panel">
-      <div class="dir-panel-label">{panelLabel} · Richtung wählen</div>
+      <div class="dir-panel-label">Finalrunde · Richtung wählen</div>
       <div class="dir-btns">
         {#each [0, 1] as dir}
-          {@const done = secDone(selectedId, dir)}
-          <button class="dir-btn" class:dir-done={done} onclick={() => startPlay(dir)}>
+          {@const done = isDone(FINAL, dir)}
+          <button
+            class="dir-btn"
+            class:dir-done={done}
+            onclick={() => { onStart({ id: FINAL, isFinal: true }, dir); finalSelected = false; }}
+          >
             <span class="dir-btn-label">{dirLabel(lesson, dir)}</span>
             {#if done}<span class="dir-check">✓</span>{/if}
           </button>
@@ -320,24 +337,16 @@
   }
 
   .node-label {
-    font-size: 0.85rem;
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 0.7rem;
     font-weight: 700;
+    letter-spacing: 1px;
   }
 
-  .play-dots {
+  .level-stars {
     display: flex;
-    gap: 5px;
+    gap: 3px;
   }
-
-  .dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 1.5px solid #1B1410;
-    background: transparent;
-  }
-
-  .dot.done { background: #7CA982; }
 
   .dir-panel {
     position: fixed;

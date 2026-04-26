@@ -29,20 +29,28 @@ export function dirLabel(lesson, dir) {
   return `${langCode(prompt)} → ${langCode(board)}`;
 }
 
-// Is sectionIndex locked? Section 0 always open; N+1 needs N to have ≥1 direction done.
-export function sectionLocked(lesson, sectionIndex, sections, progress) {
-  if (sectionIndex === 0) return false;
-  const lp   = progress[lesson.id] || {};
-  const prev = sections[sectionIndex - 1];
-  const pp   = lp[prev.id] || {};
-  return !pp['0']?.done && !pp['1']?.done;
+// Is a specific level (sectionIdx, dir) locked?
+// Order: (0,dir=1) → (0,dir=0) → (1,dir=1) → (1,dir=0) → …
+// Unlocks only when the prerequisite level achieved ≥ 2 stars (best >= starThresholds[1]).
+export function levelLocked(lesson, sectionIdx, dir, sections, progress, starThresholds = [1, 10, 20]) {
+  if (sectionIdx === 0 && dir === 1) return false;
+  const lp = progress[lesson.id] || {};
+  const twoStar = starThresholds[1];
+  if (dir === 0) {
+    const sp = lp[sections[sectionIdx].id] || {};
+    return (sp['1']?.best ?? -1) < twoStar;
+  } else {
+    const pp = lp[sections[sectionIdx - 1].id] || {};
+    return (pp['0']?.best ?? -1) < twoStar;
+  }
 }
 
-// Final round unlocks when every section has ≥1 direction done.
-export function finalLocked(lesson, sections, progress) {
+// Final round unlocks when every section has both directions with ≥ 2 stars.
+export function finalLocked(lesson, sections, progress, starThresholds = [1, 10, 20]) {
   const lp = progress[lesson.id] || {};
+  const twoStar = starThresholds[1];
   return !sections.every(s => {
     const sp = lp[s.id] || {};
-    return sp['0']?.done || sp['1']?.done;
+    return (sp['0']?.best ?? -1) >= twoStar && (sp['1']?.best ?? -1) >= twoStar;
   });
 }
