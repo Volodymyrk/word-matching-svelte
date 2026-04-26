@@ -3,56 +3,42 @@
     "id": "la1",
     "name": "Latein Lektion 1",
     "vocab_file": "latin_1.json",
-    "languages": ["german", "latin"],
-    "round_seconds": 60,
-    "combo_seconds": 2.0
+    "languages": ["german", "latin"]
   },
   {
     "id": "la2",
     "name": "Latein Lektion 2",
     "vocab_file": "latin_2.json",
-    "languages": ["german", "latin"],
-    "round_seconds": 60,
-    "combo_seconds": 2.0
+    "languages": ["german", "latin"]
   },
   {
     "id": "la3",
     "name": "Latein Lektion 3",
     "vocab_file": "latin_3.json",
-    "languages": ["german", "latin"],
-    "round_seconds": 60,
-    "combo_seconds": 2.0
+    "languages": ["german", "latin"]
   },
   {
     "id": "la4",
     "name": "Latein Lektion 4",
     "vocab_file": "latin_4.json",
-    "languages": ["german", "latin"],
-    "round_seconds": 60,
-    "combo_seconds": 2.0
+    "languages": ["german", "latin"]
   },
   {
     "id": "la5",
     "name": "Latein Lektion 5",
     "vocab_file": "latin_5.json",
-    "languages": ["german", "latin"],
-    "round_seconds": 60,
-    "combo_seconds": 2.0
+    "languages": ["german", "latin"]
   },
   {
     "id": "de1",
     "name": "Deutsch Lektion 1",
     "vocab_file": "german_1.json",
-    "languages": ["german", "english"],
-    "round_seconds": 60,
-    "combo_seconds": 2.0
+    "languages": ["german", "english"]
   },
   {
     "id": "de2",
     "name": "Deutsch Lektion 2",
     "vocab_file": "german_2.json",
-    "languages": ["german", "english"],
-    "round_seconds": 60,
-    "combo_seconds": 2.0
+    "languages": ["german", "english"]
   }
 ]
