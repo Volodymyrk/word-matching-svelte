@@ -226,7 +226,7 @@
       clearTimeout(comboPrimedTimeout);
       wrongTimeout = setTimeout(() => { wrongCardId = -1; }, globals?.wrong_flash_ms ?? 500);
       if (!wrongWords.some(w => w.clicked === card.base)) {
-        wrongWords = [...wrongWords, { clicked: card.base, correct: targetWords[0] }];
+        wrongWords = [...wrongWords, { clicked: card.base, correct: card.target }];
       }
       return;
     }
