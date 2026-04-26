@@ -350,8 +350,6 @@
 
   .wrong-clicked {
     color: #E8654A;
-    text-decoration: line-through;
-    text-decoration-color: #E8654A;
   }
 
   .wrong-arrow {
