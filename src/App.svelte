@@ -40,7 +40,8 @@
   let mistakesInSet    = $state(0);
   let wrongInRound     = $state(0);
   let correctClicks    = $state(0);
-  let wrongWords       = $state([]);  // { clicked, correct }[]
+  let wrongWords          = $state([]);  // { clicked, correct }[]
+  let previewTargetWord   = $state(null);
   let setsCompleted    = $state(0);
   let comboActive      = $state(false);
   let comboPrimed      = $state(false);
@@ -86,6 +87,7 @@
   let timerInterval        = null;
   let wrongTimeout         = null;
   let comboPrimedTimeout   = null;
+  let targetPreviewTimeout = null;
 
   onMount(async () => {
     [globals, lessons] = await Promise.all([fetchGlobals(), fetchLessons()]);
@@ -98,6 +100,7 @@
     clearInterval(timerInterval);
     clearTimeout(wrongTimeout);
     clearTimeout(comboPrimedTimeout);
+    clearTimeout(targetPreviewTimeout);
   });
 
   // ── Navigation ─────────────────────────────────────────────────────────────
@@ -128,8 +131,10 @@
   function quitToSaga() {
     clearInterval(timerInterval);
     clearTimeout(wrongTimeout);
-    displayCards = [];
-    targetWords  = [];
+    clearTimeout(targetPreviewTimeout);
+    displayCards      = [];
+    targetWords       = [];
+    previewTargetWord = null;
     screen = 'saga';
   }
 
@@ -199,6 +204,8 @@
     wrongInRound      = 0;
     correctClicks     = 0;
     wrongWords        = [];
+    previewTargetWord = null;
+    clearTimeout(targetPreviewTimeout);
     comboActive       = false;
     comboPrimed       = false;
     comboRestartKey   = 0;
@@ -266,6 +273,16 @@
   }
 
   function comboExpired() { comboActive = false; comboPrimed = false; }
+
+  function clickTargetWord(word) {
+    clearTimeout(targetPreviewTimeout);
+    previewTargetWord = word;
+    comboActive     = false;
+    comboPrimed     = false;
+    comboRestartKey = 0;
+    clearTimeout(comboPrimedTimeout);
+    targetPreviewTimeout = setTimeout(() => { previewTargetWord = null; }, globals?.wrong_flash_ms ?? 2000);
+  }
 </script>
 
 {#if screen === 'lessons'}
@@ -364,7 +381,12 @@
       <div class="target-label">{bottomLabel}</div>
       <div class="target-row">
         {#each targetWords as word}
-          <div class="target-card">{word}</div>
+          <button class="target-card" class:peeking={previewTargetWord === word} onclick={() => clickTargetWord(word)}>
+            {word}
+            {#if previewTargetWord === word}
+              <span class="card-hint">{displayCards.find(c => c.target === word)?.base ?? ''}</span>
+            {/if}
+          </button>
         {/each}
       </div>
     </div>
@@ -639,6 +661,8 @@
   .target-card {
     flex: 1;
     min-width: 0;
+    appearance: none;
+    cursor: pointer;
     background: #C8E0D4;
     color: #2F5A3D;
     border: 2.5px solid #1B1410;
@@ -650,6 +674,16 @@
     font-weight: 400;
     text-align: center;
     line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    transition: background 120ms;
+  }
+
+  .target-card.peeking {
+    background: #E8654A;
+    color: #FFF6E8;
   }
 
   /* Game footer */
