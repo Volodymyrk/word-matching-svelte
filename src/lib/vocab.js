@@ -36,7 +36,7 @@ async function loadPairs(config, sectionId = null) {
     const words = data[lk]?.[sk] || [];
     for (const w of words) {
       if (w[bk] !== undefined && w[tk] !== undefined) {
-        pairs.push({ base: w[bk], target: w[tk] });
+        pairs.push({ base: w[bk], target: w[tk], grammar: w.grammar ?? '' });
       }
     }
   } else {
@@ -44,7 +44,7 @@ async function loadPairs(config, sectionId = null) {
       for (const words of Object.values(lv)) {
         for (const w of words) {
           if (w[bk] !== undefined && w[tk] !== undefined) {
-            pairs.push({ base: w[bk], target: w[tk] });
+            pairs.push({ base: w[bk], target: w[tk], grammar: w.grammar ?? '' });
           }
         }
       }
@@ -85,12 +85,13 @@ export async function createRound(config, sectionId = null) {
   const targetWords   = targetIndices.map(i => chosen[i].target);
   const positions     = sample(GRID, 6);
   const displayCards  = chosen.map((pair, i) => ({
-    id:     i,
-    base:   pair.base,
-    target: pair.target,
-    left:   positions[i].left,
-    top:    positions[i].top,
-    rot:    (Math.random() - 0.5) * 8,
+    id:      i,
+    base:    pair.base,
+    target:  pair.target,
+    grammar: pair.grammar,
+    left:    positions[i].left,
+    top:     positions[i].top,
+    rot:     (Math.random() - 0.5) * 8,
   }));
   return { displayCards, targetWords };
 }

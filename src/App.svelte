@@ -252,6 +252,11 @@
     }
 
     correctClicks++;
+    const boardLang  = selectedLesson?.languages?.[selectedDir];
+    const targetLang = selectedLesson?.languages?.[1 - selectedDir];
+    if (boardLang === 'german')       speakWord(card.base,   card.grammar, 'german');
+    else if (targetLang === 'german') speakWord(card.target, card.grammar, 'german');
+
     const inCombo     = comboPrimed || comboActive;
     const comboDurMs  = Math.round((globals?.combo_seconds ?? 2) * 1000);
     score += inCombo ? (globals?.score_combo ?? 2) : (globals?.score_correct ?? 1);
@@ -273,6 +278,18 @@
   }
 
   function comboExpired() { comboActive = false; comboPrimed = false; }
+
+  function speakWord(word, grammar, lang) {
+    if (!window.speechSynthesis) return;
+    const article = lang === 'german'
+      ? (grammar === 'm' ? 'der' : grammar === 'f' ? 'die' : grammar === 'n' ? 'das' : '')
+      : '';
+    const utt = new SpeechSynthesisUtterance(article ? `${article} ${word}` : word);
+    utt.lang = lang === 'german' ? 'de-DE' : '';
+    utt.rate = 0.9;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utt);
+  }
 
   function clickTargetWord(word) {
     clearTimeout(targetPreviewTimeout);
