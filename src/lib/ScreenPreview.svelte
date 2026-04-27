@@ -38,7 +38,8 @@
 
 <style>
   .page {
-    min-height: 100dvh;
+    height: 100dvh;
+    overflow: hidden;
     background: #FBF6EC;
     font-family: 'Bricolage Grotesque', system-ui, sans-serif;
     display: flex;
@@ -104,13 +105,15 @@
 
   .word-list {
     flex: 1;
+    min-height: 0;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     margin: 0 1.25rem;
     border: 2px solid #1B1410;
     border-radius: 16px;
     box-shadow: 3px 3px 0 #1B1410;
     background: #FFFCF5;
-    overflow: hidden;
   }
 
   .word-row {
