@@ -37,7 +37,7 @@
   },
   {
     "id": "de2",
-    "name": "Deutsch Lektion 2",
+    "name": "Deutsch 2 - supermarket",
     "vocab_file": "german_2.json",
     "languages": ["german", "english"]
   }
