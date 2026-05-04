@@ -1,9 +1,13 @@
 <script>
   import { dirLabel } from './theme.js';
 
+  const base = import.meta.env.BASE_URL;
+
   let { lesson, sectionLabel, dir, words = [], onBack, onStart } = $props();
 
-  const label = $derived(dirLabel(lesson, dir));
+  const label      = $derived(dirLabel(lesson, dir));
+  const baseLang   = $derived(lesson.languages[dir]);
+  const targetLang = $derived(lesson.languages[1 - dir]);
 </script>
 
 <div class="page">
@@ -24,9 +28,17 @@
   <div class="word-list">
     {#each words as w, i}
       <div class="word-row" class:alt={i % 2 !== 0}>
-        <span class="word-base">{w.base}</span>
+        {#if baseLang === 'english' && w.icon}
+          <img class="word-icon" src="{base}icons/{w.icon}" alt={w.base}/>
+        {:else}
+          <span class="word-base">{w.base}</span>
+        {/if}
         <span class="word-sep">→</span>
-        <span class="word-target">{w.target}</span>
+        {#if targetLang === 'english' && w.icon}
+          <img class="word-icon" src="{base}icons/{w.icon}" alt={w.target}/>
+        {:else}
+          <span class="word-target">{w.target}</span>
+        {/if}
       </div>
     {/each}
   </div>
@@ -132,6 +144,13 @@
 
   .word-row.alt {
     background: #F5F0E6;
+  }
+
+  .word-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    flex-shrink: 0;
   }
 
   .word-base {

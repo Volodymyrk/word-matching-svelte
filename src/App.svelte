@@ -54,6 +54,9 @@
   const setsPerRound = $derived(globals?.sets_per_round ?? 6);
   const setProgress  = $derived(setsCompleted);
 
+  const boardLang       = $derived(selectedLesson?.languages?.[selectedDir] ?? '');
+  const targetLang      = $derived(selectedLesson?.languages?.[1 - selectedDir] ?? '');
+
   const currentDirLabel = $derived.by(() => {
     if (!selectedLesson || selectedDir == null) return '';
     return dirLabel(selectedLesson, selectedDir);
@@ -252,11 +255,6 @@
     }
 
     correctClicks++;
-    const boardLang  = selectedLesson?.languages?.[selectedDir];
-    const targetLang = selectedLesson?.languages?.[1 - selectedDir];
-    if (boardLang === 'german')       speakWord(card.base,   card.grammar, 'german');
-    else if (targetLang === 'german') speakWord(card.target, card.grammar, 'german');
-
     const inCombo     = comboPrimed || comboActive;
     const comboDurMs  = Math.round((globals?.combo_seconds ?? 2) * 1000);
     score += inCombo ? (globals?.score_combo ?? 2) : (globals?.score_correct ?? 1);
@@ -279,17 +277,6 @@
 
   function comboExpired() { comboActive = false; comboPrimed = false; }
 
-  function speakWord(word, grammar, lang) {
-    if (!window.speechSynthesis) return;
-    const article = lang === 'german'
-      ? (grammar === 'm' ? 'der' : grammar === 'f' ? 'die' : grammar === 'n' ? 'das' : '')
-      : '';
-    const utt = new SpeechSynthesisUtterance(article ? `${article} ${word}` : word);
-    utt.lang = lang === 'german' ? 'de-DE' : '';
-    utt.rate = 0.9;
-    speechSynthesis.cancel();
-    speechSynthesis.speak(utt);
-  }
 
   function clickTargetWord(word) {
     clearTimeout(targetPreviewTimeout);
@@ -384,7 +371,11 @@
             style="--rot:{card.rot || 0}deg"
             onclick={() => clickCard(card)}
           >
-            {card.base}
+            {#if boardLang === 'english' && card.icon}
+              <img class="card-icon" src="{import.meta.env.BASE_URL}icons/{card.icon}" alt={card.base}/>
+            {:else}
+              {card.base}
+            {/if}
             {#if wrongCardId === card.id}
               <span class="card-hint">{card.target}</span>
             {/if}
@@ -398,10 +389,15 @@
       <div class="target-label">{bottomLabel}</div>
       <div class="target-row">
         {#each targetWords as word}
+          {@const iconCard = displayCards.find(c => c.target === word)}
           <button class="target-card" class:peeking={previewTargetWord === word} onclick={() => clickTargetWord(word)}>
-            {word}
+            {#if targetLang === 'english' && iconCard?.icon}
+              <img class="card-icon" src="{import.meta.env.BASE_URL}icons/{iconCard.icon}" alt={word}/>
+            {:else}
+              {word}
+            {/if}
             {#if previewTargetWord === word}
-              <span class="card-hint">{displayCards.find(c => c.target === word)?.base ?? ''}</span>
+              <span class="card-hint">{iconCard?.base ?? ''}</span>
             {/if}
           </button>
         {/each}
@@ -641,6 +637,13 @@
     background: #C44536;
     color: white;
     animation: vmShake 280ms ease-in-out;
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    display: block;
   }
 
   .card-hint {
