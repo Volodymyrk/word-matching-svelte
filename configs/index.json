@@ -28,17 +28,5 @@
     "name": "Latein Lektion 5",
     "vocab_file": "latin_5.json",
     "languages": ["german", "latin"]
-  },
-  {
-    "id": "de1",
-    "name": "Deutsch Lektion 1",
-    "vocab_file": "german_1.json",
-    "languages": ["german", "english"]
-  },
-  {
-    "id": "de2",
-    "name": "Deutsch Lektion 2",
-    "vocab_file": "german_2.json",
-    "languages": ["german", "english"]
   }
 ]
