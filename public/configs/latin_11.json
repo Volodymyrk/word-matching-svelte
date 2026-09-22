@@ -1,0 +1,63 @@
+{
+  "lesson_11": {
+    "section_1": [
+      { "latin": "cūra", "grammar": "cūrae f", "german": "die Sorge, die Pflege" },
+      { "latin": "premere", "grammar": "premō, pressī", "german": "drücken, unterdrücken, bedrängen" },
+      { "latin": "quī", "grammar": "quae, quod", "german": "welcher, welche, welches; der, die, das" },
+      { "latin": "ea, quae", "grammar": "n Pl.", "german": "das, was (Sg.)" },
+      { "latin": "futūrus", "grammar": "futūra, futūrum", "german": "künftig, zukünftig" },
+      { "latin": "beātus", "grammar": "beāta, beātum", "german": "glücklich, reich" },
+      { "latin": "clārus", "grammar": "clāra, clārum", "german": "klar, hell, berühmt" },
+      { "latin": "virtūs", "grammar": "virtūtis f", "german": "die Tapferkeit, die Tüchtigkeit, die Vortrefflichkeit, die Leistung" },
+      { "latin": "exemplum", "grammar": "exemplī n", "german": "das Beispiel, das Vorbild" }
+    ],
+    "section_2": [
+      { "latin": "summus", "grammar": "summa, summum", "german": "der höchste, oberste, letzte" },
+      { "latin": "amplus", "grammar": "ampla, amplum", "german": "bedeutend, groß, weit" },
+      { "latin": "statua", "grammar": "statuae f", "german": "die Statue, das Standbild" },
+      { "latin": "Cloelia", "grammar": "Cloeliae f", "german": "Cloelia (Heldin der röm. Frühzeit)" },
+      { "latin": "Porsenna", "grammar": "Porsennae m", "german": "Lars Porsenna (etruskischer König)" },
+      { "latin": "Etrūscus", "grammar": "Etrūsca, Etrūscum", "german": "etruskisch; Subst. der Etrusker" },
+      { "latin": "Iāniculum", "grammar": "Iāniculī n", "german": "der Janikulus (Hügel Roms)" },
+      { "latin": "castra", "grammar": "castrōrum n Pl.", "german": "das Lager" },
+      { "latin": "pōnere", "grammar": "pōnō, posuī", "german": "(auf)stellen, (hin)legen, setzen" },
+      { "latin": "castra pōnere", "grammar": "castra pōnō", "german": "ein Lager aufschlagen" },
+      { "latin": "mīles", "grammar": "mīlitis m", "german": "der Soldat" },
+      { "latin": "patria", "grammar": "patriae f", "german": "die Heimat" },
+      { "latin": "dēfendere", "grammar": "dēfendō, dēfendī ā m. Abl.", "german": "abwehren, verteidigen (vor/gegen)" }
+    ],
+    "section_3": [
+      { "latin": "ūllus", "grammar": "ūlla, ūllum (Gen. ūllīus, Dat. ūllī)", "german": "irgendeiner, irgendeine, irgendein" },
+      { "latin": "hostis", "grammar": "hostis m (Gen. Pl. -ium)", "german": "der Feind, der Landesfeind" },
+      { "latin": "victor", "grammar": "victōris m", "german": "der Sieger" },
+      { "latin": "lēx", "grammar": "lēgis f", "german": "das Gesetz, die Bedingung" },
+      { "latin": "obses", "grammar": "obsidis m f", "german": "die Geisel" },
+      { "latin": "fīnis", "grammar": "fīnis m (Gen. Pl. -ium)", "german": "Ende, Grenze, Ziel, Zweck; Pl. Gebiet" },
+      { "latin": "suus", "grammar": "sua, suum", "german": "sein, ihr" },
+      { "latin": "virgō", "grammar": "virginis f", "german": "das Mädchen, die junge Frau" },
+      { "latin": "lacrima", "grammar": "lacrimae f", "german": "die Träne" }
+    ],
+    "section_4": [
+      { "latin": "vester", "grammar": "vestra, vestrum", "german": "euer" },
+      { "latin": "contrā", "grammar": "Präp. m. Akk.", "german": "gegen" },
+      { "latin": "agere", "grammar": "agō, ēgī", "german": "handeln, treiben, verhandeln" },
+      { "latin": "malum", "grammar": "malī n", "german": "das Leid, das Übel, das Unglück" },
+      { "latin": "prīmus", "grammar": "prīma, prīmum", "german": "der erste" },
+      { "latin": "lūx", "grammar": "lūcis f", "german": "das Licht, das Tageslicht" },
+      { "latin": "prīmā lūce", "grammar": "", "german": "bei Tagesanbruch, bei Sonnenaufgang" },
+      { "latin": "cōgere", "grammar": "cōgō, coēgī m. Inf.", "german": "zwingen (etw. zu tun), (ver)sammeln" },
+      { "latin": "inquam", "grammar": "3. Pers. Sg. inquit", "german": "sage ich, sagte ich" },
+      { "latin": "prīmum", "grammar": "Adv.", "german": "erstens, zuerst, zum ersten Mal" },
+      { "latin": "Tiberis", "grammar": "Tiberis m (Akk. -im, Abl. -ī)", "german": "der Tiber (Fluss durch Rom)" }
+    ],
+    "section_5": [
+      { "latin": "praesidium", "grammar": "praesidiī n", "german": "der Schutz, die Hilfe, der Wachposten, die Schutztruppe" },
+      { "latin": "numerus", "grammar": "numerī m", "german": "die Zahl, die Menge" },
+      { "latin": "aqua", "grammar": "aquae f", "german": "das Wasser" },
+      { "latin": "servāre", "grammar": "servō ā m. Abl.", "german": "retten vor, bewahren vor" },
+      { "latin": "tēlum", "grammar": "tēlī n", "german": "die Waffe, das Geschoss" },
+      { "latin": "tūtus", "grammar": "tūta, tūtum", "german": "sicher" },
+      { "latin": "pervenīre", "grammar": "perveniō, pervēnī ad/in m. Akk.", "german": "kommen zu/nach" }
+    ]
+  }
+}

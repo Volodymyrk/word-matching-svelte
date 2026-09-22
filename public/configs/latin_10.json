@@ -1,0 +1,65 @@
+{
+  "lesson_10": {
+    "section_1": [
+      { "latin": "Rōmulus", "grammar": "Rōmulī m", "german": "Romulus (der sagenhafte Gründer Roms)" },
+      { "latin": "cōpiae", "grammar": "cōpiārum f Pl.", "german": "die Truppen" },
+      { "latin": "Rōmānus", "grammar": "Rōmāna, Rōmānum", "german": "römisch; Subst. der Römer" },
+      { "latin": "ager", "grammar": "agrī m", "german": "der Acker, das Feld, das Gebiet" },
+      { "latin": "iubēre", "grammar": "iubeō, iussī", "german": "anordnen, befehlen" },
+      { "latin": "nox", "grammar": "noctis f (Gen. Pl. noctium)", "german": "die Nacht" },
+      { "latin": "venīre", "grammar": "veniō, vēnī", "german": "kommen" },
+      { "latin": "rēx", "grammar": "rēgis m", "german": "der König" },
+      { "latin": "noster", "grammar": "nostra, nostrum", "german": "unser" },
+      { "latin": "accēdere", "grammar": "accēdō, accessī", "german": "herbeikommen, sich nähern" },
+      { "latin": "cōnsistere", "grammar": "cōnsistō, cōnstitī", "german": "stehen bleiben, sich aufstellen" }
+    ],
+    "section_2": [
+      { "latin": "is", "grammar": "ea, id", "german": "dieser, diese, dieses; er, sie, es" },
+      { "latin": "locus", "grammar": "locī m", "german": "der Ort, der Platz, die Stelle" },
+      { "latin": "eō locō", "grammar": "", "german": "an der (dieser) Stelle" },
+      { "latin": "nēmō", "grammar": "nēminis", "german": "niemand" },
+      { "latin": "causa", "grammar": "causae f", "german": "die Sache, der Grund; der Prozess" },
+      { "latin": "plērīque", "grammar": "plēraeque, plēraque Pl.", "german": "die meisten, sehr viele" },
+      { "latin": "prō", "grammar": "Präp. m. Abl.", "german": "vor; anstelle von, für" },
+      { "latin": "factum", "grammar": "factī n", "german": "die Handlung, die Tat, die Tatsache" }
+    ],
+    "section_3": [
+      { "latin": "ante", "grammar": "Adv.", "german": "vorher" },
+      { "latin": "sedēre", "grammar": "sedeō, sēdī", "german": "sitzen" },
+      { "latin": "hīc", "grammar": "Adv.", "german": "hier" },
+      { "latin": "dūcere", "grammar": "dūcō, dūxī", "german": "führen, ziehen; m. dopp. Akk. halten für" },
+      { "latin": "committere", "grammar": "committō, commīsī", "german": "anvertrauen, begehen, veranstalten" },
+      { "latin": "Remus", "grammar": "Remī m", "german": "Remus (der Zwillingsbruder des Romulus)" },
+      { "latin": "frāter", "grammar": "frātris m", "german": "der Bruder" },
+      { "latin": "interficere", "grammar": "interficiō, interfēcī", "german": "töten, vernichten" },
+      { "latin": "Rōma", "grammar": "Rōmae f", "german": "Rom" },
+      { "latin": "cōnstituere", "grammar": "cōnstituō, cōnstituī", "german": "aufstellen, gründen, festsetzen, beschließen" },
+      { "latin": "Sabīnus", "grammar": "Sabīna, Sabīnum", "german": "sabinisch; Subst. der Sabiner" },
+      { "latin": "fīlia", "grammar": "fīliae f", "german": "die Tochter" },
+      { "latin": "īnsidiae", "grammar": "īnsidiārum f Pl.", "german": "die Falle, das Attentat, die Hinterlist" }
+    ],
+    "section_4": [
+      { "latin": "suspīciō", "grammar": "suspīciōnis f", "german": "der Verdacht, die Vermutung" },
+      { "latin": "Rōmam", "grammar": "", "german": "nach Rom (wohin?)" },
+      { "latin": "quoniam", "grammar": "Subj.", "german": "da ja, weil ja" },
+      { "latin": "crēdere", "grammar": "crēdō, crēdidī", "german": "glauben, anvertrauen" },
+      { "latin": "annus", "grammar": "annī m", "german": "das Jahr" },
+      { "latin": "novus", "grammar": "nova, novum", "german": "neu, ungewöhnlich" },
+      { "latin": "dolor", "grammar": "dolōris m", "german": "der Schmerz" },
+      { "latin": "praetereā", "grammar": "Adv.", "german": "außerdem" },
+      { "latin": "invenīre", "grammar": "inveniō, invēnī", "german": "finden, erfinden" },
+      { "latin": "Mārs", "grammar": "Mārtis m", "german": "Mars (der römische Kriegsgott)" }
+    ],
+    "section_5": [
+      { "latin": "mittere", "grammar": "mittō, mīsī", "german": "schicken, werfen" },
+      { "latin": "fīlius", "grammar": "fīliī m", "german": "der Sohn" },
+      { "latin": "rēctē", "grammar": "Adv.", "german": "richtig, zu Recht" },
+      { "latin": "cīvitās", "grammar": "cīvitātis f", "german": "die Gemeinde, der Staat" },
+      { "latin": "imperāre", "grammar": "imperō, imperāvī m. Dat.", "german": "befehlen, herrschen (über)" },
+      { "latin": "moenia", "grammar": "moenium n Pl.", "german": "die Mauern, die Stadtmauern" },
+      { "latin": "rīdēre", "grammar": "rīdeō, rīsī", "german": "lachen, auslachen" },
+      { "latin": "servitūs", "grammar": "servitūtis f", "german": "die Sklaverei" },
+      { "latin": "coniūnx", "grammar": "coniugis m f", "german": "der Gatte, die Gattin, der Ehemann, die Ehefrau" }
+    ]
+  }
+}
