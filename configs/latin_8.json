@@ -1,0 +1,63 @@
+{
+  "lesson_8": {
+    "section_1": [
+      { "latin": "quondam", "grammar": "Adv.", "german": "einst, einmal, manchmal" },
+      { "latin": "amphitheātrum", "grammar": "amphitheātrī n", "german": "das Amphitheater" },
+      { "latin": "esse", "grammar": "sum, fuī", "german": "sein, sich befinden" },
+      { "latin": "adesse", "grammar": "adsum, adfuī", "german": "da sein, helfen" },
+      { "latin": "lūdus", "grammar": "lūdī m", "german": "das Spiel, die Schule" },
+      { "latin": "ēgregius", "grammar": "ēgregia, ēgregium", "german": "ausgezeichnet, hervorragend" },
+      { "latin": "velle", "grammar": "volō, voluī", "german": "wollen" },
+      { "latin": "nōlle", "grammar": "nōlō, nōluī", "german": "nicht wollen" },
+      { "latin": "cum", "grammar": "Subj.", "german": "als (plötzlich), (zu der Zeit) als, (immer) wenn" },
+      { "latin": "Pompēiānī", "grammar": "Pompēiānōrum m Pl.", "german": "die Pompejaner, die Einwohner von Pompeji" },
+      { "latin": "gladiātor", "grammar": "gladiātōris m", "german": "der Gladiator" },
+      { "latin": "arēna", "grammar": "arēnae f", "german": "der Sand, die Arena, der Kampfplatz" },
+      { "latin": "vōx", "grammar": "vōcis f", "german": "die Stimme, die Äußerung, der Laut" },
+      { "latin": "magnā vōce", "grammar": "", "german": "laut, mit lauter Stimme" }
+    ],
+    "section_2": [
+      { "latin": "quia", "grammar": "Subj.", "german": "weil" },
+      { "latin": "optimus", "grammar": "optima, optimum", "german": "der beste, sehr gut" },
+      { "latin": "putāre", "grammar": "putō, putāvī", "german": "glauben, meinen; m. dopp. Akk. halten für" },
+      { "latin": "pūgnāre", "grammar": "pūgnō, pūgnāvī", "german": "kämpfen" },
+      { "latin": "leō", "grammar": "leōnis m", "german": "der Löwe" },
+      { "latin": "paucī", "grammar": "paucae, pauca", "german": "wenige" },
+      { "latin": "ūnus", "grammar": "ūna, ūnum", "german": "einer, ein einziger" },
+      { "latin": "ūnus ē/ex", "grammar": "m. Abl.", "german": "einer von" }
+    ],
+    "section_3": [
+      { "latin": "malus", "grammar": "mala, malum", "german": "schlecht, schlimm, böse" },
+      { "latin": "nihil", "grammar": "", "german": "nichts" },
+      { "latin": "pūgna", "grammar": "pūgnae f", "german": "der Kampf" },
+      { "latin": "immō", "grammar": "Adv.", "german": "im Gegenteil, ja sogar" },
+      { "latin": "studēre", "grammar": "studeō, studuī m. Dat.", "german": "sich beschäftigen (mit), sich bemühen (um), streben nach" },
+      { "latin": "dēsinere", "grammar": "dēsinō", "german": "aufhören" },
+      { "latin": "nisī", "grammar": "Subj.", "german": "wenn nicht" },
+      { "latin": "facere", "grammar": "faciō", "german": "machen, tun, handeln" }
+    ],
+    "section_4": [
+      { "latin": "quamquam", "grammar": "Subj.", "german": "obwohl" },
+      { "latin": "pāx", "grammar": "pācis f", "german": "der Frieden" },
+      { "latin": "cūnctī", "grammar": "cūnctae, cūncta", "german": "alle (zusammen)" },
+      { "latin": "posse", "grammar": "possum, potuī", "german": "können" },
+      { "latin": "alius", "grammar": "alia, aliud", "german": "ein anderer" },
+      { "latin": "saxum", "grammar": "saxī n", "german": "der Fels, der Stein" },
+      { "latin": "nōnnūllī", "grammar": "nōnnūllae, nōnnūlla", "german": "einige, manche" },
+      { "latin": "deinde", "grammar": "Adv.", "german": "dann, darauf" }
+    ],
+    "section_5": [
+      { "latin": "arma", "grammar": "armōrum n Pl.", "german": "die Waffen, das Gerät" },
+      { "latin": "sēcum", "grammar": "", "german": "mit sich, bei sich" },
+      { "latin": "parcere", "grammar": "parcō m. Dat.", "german": "schonen, verschonen" },
+      { "latin": "postquam", "grammar": "Subj. m. Perf.", "german": "nachdem, als" },
+      { "latin": "ēripere", "grammar": "ēripiō, ēripuī", "german": "entreißen" },
+      { "latin": "dēnique", "grammar": "Adv.", "german": "schließlich, zuletzt" },
+      { "latin": "iacēre", "grammar": "iaceō, iacuī", "german": "liegen" },
+      { "latin": "vōs", "grammar": "Nom.", "german": "ihr" },
+      { "latin": "petere", "grammar": "petō, petīvī", "german": "bitten, verlangen, streben (nach), aufsuchen, angreifen" },
+      { "latin": "nōbīs", "grammar": "Dat.", "german": "uns, für uns" },
+      { "latin": "deesse", "grammar": "dēsum, dēfuī", "german": "abwesend sein, fehlen, nicht da sein" }
+    ]
+  }
+}
