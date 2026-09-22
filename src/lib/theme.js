@@ -19,8 +19,23 @@ export const T = {
 const LANG_CODES = { german: 'DE', latin: 'LA', english: 'EN', french: 'FR', spanish: 'ES' };
 export const langCode = l => LANG_CODES[l] || l.slice(0, 2).toUpperCase();
 
-const NUMERALS = ['I','II','III','IV','V','VI','VII','VIII','IX','X'];
-export const roman = n => NUMERALS[n] ?? String(n + 1);
+const ROMAN_VALUES = [
+  [1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'],
+  [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'],
+  [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I'],
+];
+export function roman(n) {
+  let num = n + 1;
+  if (num <= 0) return String(num);
+  let result = '';
+  for (const [value, symbol] of ROMAN_VALUES) {
+    while (num >= value) {
+      result += symbol;
+      num -= value;
+    }
+  }
+  return result;
+}
 
 // Badge text for a play direction: prompt language → board language
 export function dirLabel(lesson, dir) {
