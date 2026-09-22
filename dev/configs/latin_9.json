@@ -1,0 +1,60 @@
+{
+  "lesson_9": {
+    "section_1": [
+      { "latin": "facere", "grammar": "faciō, fēcī", "german": "machen, tun, handeln" },
+      { "latin": "sentīre", "grammar": "sentiō, sēnsī", "german": "fühlen, meinen, wahrnehmen" },
+      { "latin": "parēns", "grammar": "parentis m f", "german": "der Vater, die Mutter; Pl. die Eltern" },
+      { "latin": "currere", "grammar": "currō, cucurrī", "german": "laufen, eilen" },
+      { "latin": "pater", "grammar": "patris m", "german": "der Vater" },
+      { "latin": "māter", "grammar": "mātris f", "german": "die Mutter" },
+      { "latin": "Campānia", "grammar": "Campāniae f", "german": "Kampanien (Landschaft in Mittelitalien)" },
+      { "latin": "accidere", "grammar": "accidō, accidī", "german": "geschehen, sich ereignen" },
+      { "latin": "tēctum", "grammar": "tēctī n", "german": "das Dach, das Haus" },
+      { "latin": "homō", "grammar": "hominis m", "german": "der Mensch" },
+      { "latin": "animadvertere", "grammar": "animadvertō, animadvertī", "german": "bemerken" },
+      { "latin": "Vesuvius", "grammar": "Vesuviī m", "german": "der Vesuv (Vulkan in Kampanien)" },
+      { "latin": "mōns", "grammar": "montis m (Gen. Pl. -ium)", "german": "der Berg" }
+    ],
+    "section_2": [
+      { "latin": "vidēre", "grammar": "videō, vīdī", "german": "sehen" },
+      { "latin": "cadere", "grammar": "cadō, cecidī", "german": "fallen" },
+      { "latin": "rūrsus", "grammar": "Adv.", "german": "wieder" },
+      { "latin": "occurrere", "grammar": "occurrō, occurrī", "german": "begegnen, entgegentreten" },
+      { "latin": "timor", "grammar": "timōris m", "german": "die Angst, die Furcht" },
+      { "latin": "mors", "grammar": "mortis f", "german": "der Tod" },
+      { "latin": "urbs", "grammar": "urbis f (Gen. Pl. -ium)", "german": "die Stadt" },
+      { "latin": "dīcere", "grammar": "dīco, dīxī", "german": "sagen, sprechen" }
+    ],
+    "section_3": [
+      { "latin": "ergō", "grammar": "", "german": "also, deshalb" },
+      { "latin": "capere", "grammar": "capiō, cēpī", "german": "nehmen, fassen, ergreifen, erobern" },
+      { "latin": "cōnsilium capere", "grammar": "cōnsilium capiō", "german": "einen Plan (Entschluss) fassen" },
+      { "latin": "discēdere", "grammar": "discēdō, discessī", "german": "weggehen, auseinandergehen" },
+      { "latin": "familia", "grammar": "familiae f", "german": "die Familie, die Hausgemeinschaft" },
+      { "latin": "monēre", "grammar": "moneō, monuī", "german": "mahnen, ermahnen" },
+      { "latin": "nōbīscum", "grammar": "", "german": "mit uns" },
+      { "latin": "multitūdō", "grammar": "multitūdinis f", "german": "die Menge, die große Zahl" },
+      { "latin": "manēre", "grammar": "maneō, mānsī m. Akk.", "german": "bleiben, warten (auf)" },
+      { "latin": "alius ... alius", "grammar": "", "german": "der eine ... der andere" },
+      { "latin": "ops", "grammar": "opis f", "german": "die Hilfe, die Kraft" },
+      { "latin": "flēre", "grammar": "fleō, flēvī", "german": "weinen, beweinen" },
+      { "latin": "nōs", "grammar": "Nom.", "german": "wir" },
+      { "latin": "fugere", "grammar": "fugiō, fūgī m. Akk.", "german": "fliehen (vor), entfliehen, meiden" },
+      { "latin": "nōs", "grammar": "Akk.", "german": "uns" },
+      { "latin": "dūcere", "grammar": "dūcō, dūxī", "german": "führen, ziehen" }
+    ],
+    "section_4": [
+      { "latin": "tenebrae", "grammar": "tenebrārum f Pl.", "german": "die Dunkelheit, die Finsternis" },
+      { "latin": "vix", "grammar": "Adv.", "german": "kaum, (nur) mit Mühe" },
+      { "latin": "reperīre", "grammar": "reperiō, repperī", "german": "finden, wiederfinden" },
+      { "latin": "accipere", "grammar": "accipiō, accēpī", "german": "erhalten, erfahren, annehmen" },
+      { "latin": "pars", "grammar": "partis f (Gen. Pl. -ium)", "german": "der Teil, die Seite" },
+      { "latin": "perdere", "grammar": "perdō, perdidī", "german": "verlieren, verschwenden, vernichten" },
+      { "latin": "parcere", "grammar": "parcō, pepercī m. Dat.", "german": "schonen, verschonen" },
+      { "latin": "inde", "grammar": "Adv.", "german": "von dort, darauf, deshalb" },
+      { "latin": "contendere", "grammar": "contendō, contendī", "german": "eilen, sich anstrengen, kämpfen" },
+      { "latin": "relinquere", "grammar": "relinquō, relīquī", "german": "verlassen, zurücklassen" },
+      { "latin": "vincere", "grammar": "vincō, vīcī", "german": "siegen, besiegen, übertreffen" }
+    ]
+  }
+}

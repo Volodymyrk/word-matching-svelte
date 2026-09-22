@@ -1,0 +1,55 @@
+{
+  "lesson_7": {
+    "section_1": [
+      { "latin": "tacēre", "grammar": "taceō", "german": "schweigen, verschweigen" },
+      { "latin": "pulcher", "grammar": "pulchra, pulchrum", "german": "schön" },
+      { "latin": "accēdere", "grammar": "accēdō", "german": "herbeikommen, hingehen, sich nähern" },
+      { "latin": "abesse", "grammar": "absum", "german": "abwesend sein, nicht da sein, fehlen" },
+      { "latin": "posse", "grammar": "possum", "german": "können" },
+      { "latin": "sī", "grammar": "", "german": "wenn, falls" },
+      { "latin": "auxilium", "grammar": "auxiliī n", "german": "die Hilfe" },
+      { "latin": "auxiliō venīre", "grammar": "auxiliō veniō", "german": "zu Hilfe kommen" }
+    ],
+    "section_2": [
+      { "latin": "saepe", "grammar": "Adv.", "german": "oft" },
+      { "latin": "fugere", "grammar": "fugiō m. Akk.", "german": "fliehen (vor), entfliehen, meiden" },
+      { "latin": "lībertās", "grammar": "lībertātis f", "german": "die Freiheit" },
+      { "latin": "cibus", "grammar": "cibī m", "german": "die Nahrung, die Speise, das Essen" },
+      { "latin": "forum", "grammar": "forī n", "german": "das Forum, der Marktplatz, die Öffentlichkeit" },
+      { "latin": "quaerere", "grammar": "quaerō", "german": "fragen, suchen, erwerben wollen" },
+      { "latin": "celeritās", "grammar": "celeritātis f", "german": "die Schnelligkeit" },
+      { "latin": "mercātor", "grammar": "mercātōris m", "german": "der Kaufmann, der Händler" }
+    ],
+    "section_3": [
+      { "latin": "clāmor", "grammar": "clāmōris m", "german": "der Lärm, das Geschrei" },
+      { "latin": "varius", "grammar": "varia, varium", "german": "bunt, verschieden, vielfältig" },
+      { "latin": "vēndere", "grammar": "vēndō", "german": "verkaufen" },
+      { "latin": "convenīre", "grammar": "conveniō", "german": "zusammenkommen, zusammenpassen, besuchen" },
+      { "latin": "multa", "grammar": "multōrum n Pl.", "german": "viel, vieles" },
+      { "latin": "emere", "grammar": "emō", "german": "kaufen" },
+      { "latin": "volāre", "grammar": "volō", "german": "fliegen, eilen" },
+      { "latin": "ēripere", "grammar": "ēripiō", "german": "entreißen" }
+    ],
+    "section_4": [
+      { "latin": "arbor", "grammar": "arboris f", "german": "der Baum" },
+      { "latin": "altus", "grammar": "alta, altum", "german": "hoch, tief" },
+      { "latin": "cōnsīdere", "grammar": "cōnsīdō", "german": "sich setzen, sich niederlassen" },
+      { "latin": "studium", "grammar": "studiī n", "german": "die Beschäftigung, das Engagement, das Interesse" },
+      { "latin": "perīculum", "grammar": "perīculī n", "german": "die Gefahr" },
+      { "latin": "simul", "grammar": "Adv.", "german": "gleichzeitig, zugleich" },
+      { "latin": "labor", "grammar": "labōris m", "german": "die Arbeit, die Mühe, die Anstrengung" },
+      { "latin": "attingere", "grammar": "attingō", "german": "berühren" },
+      { "latin": "umerus", "grammar": "umerī m", "german": "die Schulter, der Oberarm" }
+    ],
+    "section_5": [
+      { "latin": "igitur", "grammar": "Adv.", "german": "also, folglich" },
+      { "latin": "sōlus", "grammar": "sōla, sōlum", "german": "allein, einzig" },
+      { "latin": "laetus", "grammar": "laeta, laetum", "german": "froh, fröhlich" },
+      { "latin": "iactāre", "grammar": "iactō", "german": "werfen, schleudern" },
+      { "latin": "animadvertere", "grammar": "animadvertō", "german": "bemerken" },
+      { "latin": "an", "grammar": "", "german": "oder (etwa)" },
+      { "latin": "amor", "grammar": "amōris m", "german": "die Liebe" },
+      { "latin": "repetere", "grammar": "repetō", "german": "wiederholen, (zurück)verlangen" }
+    ]
+  }
+}

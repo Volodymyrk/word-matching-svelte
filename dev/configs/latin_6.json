@@ -1,0 +1,229 @@
+{
+  "lesson_6": {
+    "section_1": [
+      {
+        "latin": "Mercurius",
+        "grammar": "Mercuriī m",
+        "german": "Merkur (der Götterbote, Gott des Handels, der Reise und der Diebe)"
+      },
+      {
+        "latin": "parvus",
+        "grammar": "parva, parvum",
+        "german": "klein, gering"
+      },
+      {
+        "latin": "contentus",
+        "grammar": "contenta, contentum",
+        "german": "zufrieden"
+      },
+      {
+        "latin": "ūnā cum",
+        "grammar": "m. Abl.",
+        "german": "zusammen mit"
+      },
+      {
+        "latin": "magnus",
+        "grammar": "magnā, magnum",
+        "german": "groß, bedeutend"
+      },
+      {
+        "latin": "accipere",
+        "grammar": "accipiō",
+        "german": "erhalten, erfahren, annehmen"
+      },
+      {
+        "latin": "fāma",
+        "grammar": "fāmae f",
+        "german": "der (gute/schlechte) Ruf, das Gerücht"
+      },
+      {
+        "latin": "glōria",
+        "grammar": "glōriae f",
+        "german": "der Ruhm, die Ehre"
+      },
+      {
+        "latin": "cupere",
+        "grammar": "cupiō",
+        "german": "wollen, wünschen, verlangen"
+      }
+    ],
+    "section_2": [
+      {
+        "latin": "puer",
+        "grammar": "puerī m",
+        "german": "der Junge"
+      },
+      {
+        "latin": "quis?",
+        "grammar": "",
+        "german": "wer?"
+      },
+      {
+        "latin": "mē",
+        "grammar": "Akk.",
+        "german": "mich"
+      },
+      {
+        "latin": "num?",
+        "grammar": "",
+        "german": "etwa?"
+      },
+      {
+        "latin": "mihi",
+        "grammar": "Dat.",
+        "german": "mir, für mich"
+      },
+      {
+        "latin": "templum",
+        "grammar": "templī n",
+        "german": "der Tempel"
+      },
+      {
+        "latin": "cēterī",
+        "grammar": "cēterae, cētera",
+        "german": "die übrigen"
+      },
+      {
+        "latin": "multus",
+        "grammar": "multa, multum",
+        "german": "viel"
+      }
+    ],
+    "section_3": [
+      {
+        "latin": "quam",
+        "grammar": "",
+        "german": "als, wie"
+      },
+      {
+        "latin": "miser",
+        "grammar": "misera, miserum",
+        "german": "arm, erbärmlich, unglücklich"
+      },
+      {
+        "latin": "habēre",
+        "grammar": "habeō",
+        "german": "haben, halten"
+      },
+      {
+        "latin": "nūllus",
+        "grammar": "nūlla, nūllum",
+        "german": "kein"
+      },
+      {
+        "latin": "capere",
+        "grammar": "capiō",
+        "german": "nehmen, fassen, ergreifen, erobern"
+      },
+      {
+        "latin": "incipere",
+        "grammar": "incipiō",
+        "german": "anfangen, beginnen"
+      },
+      {
+        "latin": "Apollō",
+        "grammar": "Nom.",
+        "german": "Apollon (der Gott des Lichts, der Künste und der Weissagung)"
+      },
+      {
+        "latin": "tē",
+        "grammar": "Akk.",
+        "german": "dich"
+      },
+      {
+        "latin": "docēre",
+        "grammar": "doceō",
+        "german": "lehren, unterrichten"
+      }
+    ],
+    "section_4": [
+      {
+        "latin": "-ne",
+        "grammar": "Partikel im Fragesatz",
+        "german": "(unübersetzt)"
+      },
+      {
+        "latin": "Mūsa",
+        "grammar": "Mūsae f",
+        "german": "die Muse (eine der neun Göttinnen der Künste)"
+      },
+      {
+        "latin": "mīrus",
+        "grammar": "mīra, mīrum",
+        "german": "erstaunlich, sonderbar"
+      },
+      {
+        "latin": "modus",
+        "grammar": "modī m",
+        "german": "die Art, die Weise, das Maß"
+      },
+      {
+        "latin": "meus",
+        "grammar": "mea, meum",
+        "german": "mein"
+      },
+      {
+        "latin": "quoque",
+        "grammar": "nachgestellt",
+        "german": "auch"
+      },
+      {
+        "latin": "quidem",
+        "grammar": "Adv.",
+        "german": "freilich, gewiss, wenigstens, zwar"
+      },
+      {
+        "latin": "bonus",
+        "grammar": "bona, bonum",
+        "german": "gut, tüchtig"
+      },
+      {
+        "latin": "inter",
+        "grammar": "Präp. m. Akk.",
+        "german": "unter, während, zwischen"
+      }
+    ],
+    "section_5": [
+      {
+        "latin": "apud",
+        "grammar": "Präp. m. Akk.",
+        "german": "bei"
+      },
+      {
+        "latin": "superī",
+        "grammar": "superōrum m Pl.",
+        "german": "die Götter"
+      },
+      {
+        "latin": "nōn sōlum ... sed etiam",
+        "grammar": "",
+        "german": "nicht nur ... sondern auch"
+      },
+      {
+        "latin": "līberī",
+        "grammar": "līberōrum m Pl.",
+        "german": "die Kinder"
+      },
+      {
+        "latin": "fēmina",
+        "grammar": "fēminae f",
+        "german": "die Frau"
+      },
+      {
+        "latin": "vir",
+        "grammar": "virī m",
+        "german": "der Mann"
+      },
+      {
+        "latin": "laudāre",
+        "grammar": "laudō",
+        "german": "loben"
+      },
+      {
+        "latin": "fortūna",
+        "grammar": "fortūnae f",
+        "german": "das Glück, das Schicksal"
+      }
+    ]
+  }
+}

@@ -28,5 +28,47 @@
     "name": "Latein Lektion 5",
     "vocab_file": "latin_5.json",
     "languages": ["german", "latin"]
+  },
+  {
+    "id": "la6",
+    "name": "Latein Lektion 6",
+    "vocab_file": "latin_6.json",
+    "languages": ["german", "latin"]
+  },
+  {
+    "id": "la7",
+    "name": "Latein Lektion 7",
+    "vocab_file": "latin_7.json",
+    "languages": ["german", "latin"]
+  },
+  {
+    "id": "la8",
+    "name": "Latein Lektion 8",
+    "vocab_file": "latin_8.json",
+    "languages": ["german", "latin"]
+  },
+  {
+    "id": "la9",
+    "name": "Latein Lektion 9",
+    "vocab_file": "latin_9.json",
+    "languages": ["german", "latin"]
+  },
+  {
+    "id": "la10",
+    "name": "Latein Lektion 10",
+    "vocab_file": "latin_10.json",
+    "languages": ["german", "latin"]
+  },
+  {
+    "id": "la11",
+    "name": "Latein Lektion 11",
+    "vocab_file": "latin_11.json",
+    "languages": ["german", "latin"]
+  },
+  {
+    "id": "la12",
+    "name": "Latein Lektion 12",
+    "vocab_file": "latin_12.json",
+    "languages": ["german", "latin"]
   }
 ]

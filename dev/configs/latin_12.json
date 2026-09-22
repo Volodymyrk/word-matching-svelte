@@ -1,0 +1,57 @@
+{
+  "lesson_12": {
+    "section_1": [
+      { "latin": "imperātor", "grammar": "imperātōris m", "german": "der Feldherr, der Kaiser" },
+      { "latin": "īre", "grammar": "eō, iī", "german": "gehen" },
+      { "latin": "potestās", "grammar": "potestātis f", "german": "die Macht, die Gewalt, die Amtsgewalt" },
+      { "latin": "pār", "grammar": "pār, pār (Gen. paris)", "german": "gleich, ebenbürtig" },
+      { "latin": "cīvis", "grammar": "cīvis m (Gen. Pl. -ium)", "german": "der Bürger" },
+      { "latin": "placet", "grammar": "placuit m. Dat.", "german": "es gefällt jdm., jd. beschließt" },
+      { "latin": "bellum", "grammar": "bellī n", "german": "der Krieg" },
+      { "latin": "gerere", "grammar": "gerō, gessī", "german": "führen, ausführen, tragen" }
+    ],
+    "section_2": [
+      { "latin": "numquam", "grammar": "Adv.", "german": "nie, niemals" },
+      { "latin": "adīre", "grammar": "adeō, adiī", "german": "herantreten (an), hingehen (zu), aufsuchen, auf sich nehmen, angreifen" },
+      { "latin": "omnis", "grammar": "omnis, omne", "german": "jeder, ganz; Pl. alle" },
+      { "latin": "vīrēs", "grammar": "vīrium f Pl.", "german": "die Kräfte, die Streitkräfte" },
+      { "latin": "ācer", "grammar": "ācris, ācre", "german": "energisch, heftig, scharf" },
+      { "latin": "respondēre", "grammar": "respondeō, respondī", "german": "antworten" },
+      { "latin": "Hannibal", "grammar": "Hannibalis m", "german": "Hannibal (karthagischer Feldherr)" },
+      { "latin": "facilis", "grammar": "facilis, facile", "german": "leicht (zu tun)" },
+      { "latin": "fortis", "grammar": "fortis, forte", "german": "kräftig, tapfer" },
+      { "latin": "auxilia", "grammar": "auxiliōrum n Pl.", "german": "die Hilfstruppen" }
+    ],
+    "section_3": [
+      { "latin": "ingēns", "grammar": "ingēns, ingēns (Gen. ingentis)", "german": "gewaltig, riesig, ungeheuer" },
+      { "latin": "ratiō", "grammar": "ratiōnis f", "german": "der Grund, die Vernunft, die Überlegung, die Art und Weise" },
+      { "latin": "celer", "grammar": "celeris, celere", "german": "schnell" },
+      { "latin": "haud", "grammar": "", "german": "nicht" },
+      { "latin": "similis", "grammar": "similis, simile m. Gen./Dat.", "german": "ähnlich" },
+      { "latin": "inīre", "grammar": "ineō, iniī", "german": "hineingehen (in), beginnen" },
+      { "latin": "atque", "grammar": "im Vergleich", "german": "wie, als" },
+      { "latin": "cōgnōscere", "grammar": "cōgnōscō, cōgnōvī", "german": "erkennen, kennenlernen; Perf. kennen, wissen" },
+      { "latin": "perīre", "grammar": "pereō, periī", "german": "umkommen, zugrunde gehen" }
+    ],
+    "section_4": [
+      { "latin": "proelium", "grammar": "proeliī n", "german": "der Kampf, die Schlacht" },
+      { "latin": "gravis", "grammar": "gravis, grave", "german": "schwer, bedeutend" },
+      { "latin": "commūnis", "grammar": "commūnis, commūne", "german": "gemeinsam, allgemein" },
+      { "latin": "hinc", "grammar": "Adv.", "german": "von hier, hierauf" },
+      { "latin": "superior", "grammar": "superior, superius (Gen. superiōris)", "german": "der frühere, weiter oben gelegene" },
+      { "latin": "plūrimī", "grammar": "plūrimae, plūrima Pl.", "german": "die meisten, sehr viele" },
+      { "latin": "reliquus", "grammar": "reliqua, reliquum", "german": "übrig, künftig" },
+      { "latin": "vīs", "grammar": "f (Akk. vim, Abl. vī)", "german": "die Kraft, die Gewalt, die Menge" }
+    ],
+    "section_5": [
+      { "latin": "exīstimāre", "grammar": "exīstimō, exīstimāvī", "german": "meinen, schätzen" },
+      { "latin": "legiō", "grammar": "legiōnis f", "german": "die Legion (ca. 5.000–6.000 Soldaten)" },
+      { "latin": "addūcere", "grammar": "addūcō, addūxī", "german": "heranführen, veranlassen, beeinflussen" },
+      { "latin": "nōscere", "grammar": "nōscō, nōvī", "german": "erkennen, kennenlernen" },
+      { "latin": "abīre", "grammar": "abeō, abiī", "german": "weggehen" },
+      { "latin": "redīre", "grammar": "redeō, rediī", "german": "zurückgehen, zurückkehren" },
+      { "latin": "paene", "grammar": "Adv.", "german": "fast, beinahe" },
+      { "latin": "salūs", "grammar": "salūtis f", "german": "die Gesundheit, die Rettung, das Glück, der Gruß" }
+    ]
+  }
+}
